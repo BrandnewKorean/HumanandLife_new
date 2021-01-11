@@ -1,0 +1,47 @@
+@charset "UTF-8";
+.terms-title{
+	font-size: 2rem;
+	font-weight: bold;
+	margin-bottom: 2%;
+}
+.terms-content{
+	word-break: keep-all;
+	line-height: 2;
+}
+.terms-content-inner{
+	margin-bottom: 2%;
+}
+.terms-content-title{
+	color: rgb(91,155,213);
+	font-size: 1.2rem;
+	font-weight: bold;
+}
+.terms-content-text{
+	padding: 2%;
+	border: 1px solid black;
+	height: 20vh;
+	overflow-y: scroll; 
+}
+.checkbox-label{
+	cursor: pointer;
+}
+.checkbox-label:hover{
+	font-weight: bold;
+}
+.terms-content-buttons{
+	text-align: center;
+}
+.terms-button{
+	font-size: 1.2rem;
+	width: 100px;
+	padding: 0.4rem;
+	border: none;
+	color: white;
+	cursor: pointer;
+}
+.agree{
+	background-color: rgb(91,155,213);
+}
+.disagree{
+	background-color: rgb(125,125,125);
+}

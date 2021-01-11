@@ -1,0 +1,147 @@
+@charset "UTF-8";
+.login-wrap{
+	position: relative;
+	width: 100%;
+	height: 100vh;
+	display: flex;
+}
+.login-text{
+	flex-basis: calc(40% - 5em * 2);
+	height: calc(100% - 2em * 2);
+	background-color: rgb(91,155,213);
+	padding: 2em 5em;
+	display: flex;
+}
+.login-text-buttons{
+	width: 50%;
+}
+.back-button{
+	position: absolute;
+	left: 2rem;
+	top: 2rem;
+	width: 40px;
+	height: 40px;
+	border: none;
+	border-radius: 50%;
+	background-color: rgba(0,0,0,0);
+	cursor: pointer;
+	fill: white;
+}
+.back-button:hover{
+	background-color: rgba(255,255,255,0.5);
+}
+.login-text-inner{
+	width: 50%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+.logo-wrap{
+	position: absolute;
+	top: 2em;
+}
+.logo{
+	width: 104px;
+	height: 55px;
+	background-image: url("/resources/image/header/logo.png");
+	background-size: cover;
+}
+.text-title{
+	font-size: 2rem;
+	font-weight: bold;
+	color: rgb(251,217,20);
+	margin-bottom: 3%;
+}
+.text-inner{
+	word-break: keep-all;
+	color: white;
+	font-size: 0.9rem;
+}
+.text-footer{
+	color: white;
+	position: absolute;
+	bottom: 2rem;
+	font-size: 0.7rem;
+}
+.login-form-wrap{
+	flex-basis: calc(60% - 5rem * 2);
+	padding: 2rem 5rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+.login-input-wrap{
+	position: relative;
+	padding-top: 1.5rem;
+	width: 50%;
+	border-bottom: 2px solid gray;
+	margin-bottom: 0.625rem;
+}
+.login-input-id{
+	font-size: 1.2rem;
+	padding: 0.2rem;
+	margin-bottom: 0.2rem;
+	border: none;
+	outline: none;
+	width: calc(100% - 0.2rem * 2);
+}
+.login-input-label{
+	position: absolute;
+	top: 1.5rem;
+	left: 0.2rem;
+	font-size: 1.2rem;
+	color: rgba(0,0,0,0.8);
+}
+.login-input-check{
+	font-size: 0.8rem;
+	color: red;
+}
+.wrong-input{
+	border-bottom: 2px solid red !important;
+}
+.blank{
+	height: 24px;
+}
+.login-input-password{
+	font-size: 1.2rem;
+	padding: 0.2rem;
+	margin-bottom: 0.2rem;
+	border: none;
+	outline: none;
+	width: calc(100% - (0.2rem * 2) - 4rem);
+}
+.password-button{
+	width: 2rem;
+	border: none;
+	height: 2rem;
+	padding: 0;
+	margin: 0;
+	background-color: rgba(0,0,0,0);
+	cursor: pointer;
+	outline: none;
+	float: right;
+}
+.login-button{
+	font-size: 1rem;
+	padding: 1rem 0;
+	width: 50%;
+	border: none;
+	outline: none;
+	border-radius: 3rem;
+	cursor: pointer;
+}
+.submit{
+	background-color: rgb(91,155,213);
+	color: white;
+}
+.submit:hover{
+	background-color: rgb(0,79,147);
+}
+.join{
+	background-color: rgb(0,0,0,0.1);
+	color: black;
+}
+.join:hover{
+	background-color: rgb(0,0,0,0.3);
+}

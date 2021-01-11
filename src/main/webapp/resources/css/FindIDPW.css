@@ -1,0 +1,26 @@
+@charset "UTF-8";
+.find-wrap{
+	border-top: 1px solid gray;
+	display: flex;
+	flex-direction: column;
+}
+.find-row{
+	display: flex;
+	flex-direction: row;
+}
+.col1{
+	flex-basis: calc(30% - 1rem * 2);
+	padding: 0 1rem;
+	text-align: right;
+	border-bottom: 1px solid gray;
+	background-color: rgba(0,0,0,0.1);
+}
+.col2{
+	flex-basis: calc(70% - 1rem * 2);
+	border-bottom: 1px solid gray;
+	padding: 0 1rem;
+}
+.point{
+	color: orange;
+	margin-right: 0.5rem;
+}

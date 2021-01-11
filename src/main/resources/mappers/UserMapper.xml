@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="humanandlife.mappers.UserMapper">
+	<select id="selectOnebyEmail" resultType="com.dnalab.humanandlife.vo.UserVO">
+		select
+			email,
+			password,
+			phone,
+			name,
+			authority,
+			joindate,
+			recentaccess
+		from
+			user
+		where
+			email = #{email}
+	</select>
+	
+	<select id="selectOnebyPhone" resultType="com.dnalab.humanandlife.vo.UserVO">
+		select
+			email,
+			password,
+			phone,
+			name,
+			authority,
+			joindate,
+			recentaccess
+		from
+			user
+		where
+			phone = #{phone}
+	</select>
+	
+	<insert id="insert">
+		insert into
+			user(
+				email,
+				password,
+				phone,
+				name,
+				authority,
+				joindate
+			)
+			values(
+				#{email},
+				#{password},
+				#{phone},
+				'${name}',
+				'ROLE_USER',
+				sysdate()
+			)
+	</insert>
+</mapper>

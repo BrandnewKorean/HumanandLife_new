@@ -1,0 +1,25 @@
+@charset "UTF-8";
+.come-table{
+	display: flex;
+	flex-direction: column;
+	border-top: 1px solid red;
+}
+.come-table-row{
+	display: flex;
+	flex-direction: row;
+}
+.come-col1{
+	flex-basis: calc(15% - 1px);
+	border-bottom: 1px solid gray;
+	border-right: 1px solid gray;
+	text-align: center;
+	padding: 1em 0;
+	background-color: rgb(222,222,222);
+	font-weight: bold;
+	font-size: 1rem;
+}
+.come-col2{
+	flex-basis: calc(85% - 1em);
+	border-bottom: 1px solid gray;
+	padding: 1em 0 1em 1em;
+}
