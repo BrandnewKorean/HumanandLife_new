@@ -6,6 +6,6 @@
 <meta charset="UTF-8">
 </head>
 <body>
-	사업개요 내용
+	사업개요 내용 부분
 </body>
 </html>
