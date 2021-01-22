@@ -1,14 +1,29 @@
 package com.dnalab.humanandlife;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.dnalab.humanandlife.service.NoticeService;
+import com.dnalab.humanandlife.service.StoreService;
+import com.dnalab.humanandlife.vo.Search;
 
 @Controller
 public class HomeController {
 	
+	@Autowired
+	NoticeService noticeService;
+	
+	@Autowired
+	StoreService storeService;
+	
 	@RequestMapping(value = {"","/home"})
-	public ModelAndView home(ModelAndView mv) {
+	public ModelAndView home(ModelAndView mv, Search search) {
+		search.setKeyword("");
+		search.setPerPage(4);
+		mv.addObject("main", storeService.getMainList(search));
 		mv.setViewName("Home");
 		return mv;
 	}
@@ -75,6 +90,32 @@ public class HomeController {
 	@RequestMapping(value = "/way-to-come")
 	public ModelAndView waytocome(ModelAndView mv) {
 		mv.setViewName("WaytoCome");
+		return mv;
+	}
+	
+	@RequestMapping(value = "notice")
+	public ModelAndView notice(ModelAndView mv, Search search) {
+		search.setPerPage(10);
+		mv.addObject("notice", noticeService.getNoticeSearchList(search));
+		mv.setViewName("Notice");
+		return mv;
+	}
+	
+	@RequestMapping(value = "notice/{currPage}")
+	public ModelAndView notice(ModelAndView mv, @PathVariable int currPage, Search search) {
+		search.setCurrPage(currPage);
+		search.setPerPage(10);
+		mv.addObject("notice", noticeService.getNoticeSearchList(search));
+		mv.setViewName("Notice");
+		return mv;
+	}
+	
+	@RequestMapping(value = "notice/{currPage}/{seq}")
+	public ModelAndView noticeview(ModelAndView mv, @PathVariable int currPage, @PathVariable int seq, Search search) {
+		search.setCurrPage(currPage);
+		mv.addObject("search", search);
+		mv.addObject("vo", noticeService.getNotice(seq));
+		mv.setViewName("NoticeView");
 		return mv;
 	}
 }

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="humanandlife.mappers.StoreMapper">
+	<select id="getList" resultType="com.dnalab.humanandlife.vo.StoreVO" parameterType="map">
+		select
+			s2.seq,
+			s2.main_category,
+			s2.product_code,
+			s2.name,
+			s2.price,
+			s2.count,
+			s2.isnew,
+			s2.iscolor
+		from
+			(select
+				s1.seq,
+				s1.main_category,
+				s1.product_code,
+				p.name,
+				p.price,
+				p.count,
+				p.isnew,
+				p.iscolor
+			from
+				store s1,
+				product p
+			where
+				seq > 0 and
+				main_category = #{vo.main_category} and
+				s1.product_code = p.product_code and
+				(<include refid="search"></include>)
+			) as s2
+		<include refid="order"></include>
+		limit #{search.start}, #{search.perPage}
+	</select>
+	
+	<sql id="search">
+		p.name like CONCAT(CONCAT('%',#{search.keyword}),'%')
+	</sql>
+	
+	<sql id="order">
+		<if test="orderby == 'count desc'">order by count desc</if>
+		<if test="orderby == 'seq desc'">order by seq desc</if>
+	</sql>
+	
+	<select id="getThumbnailList" resultType="com.dnalab.humanandlife.vo.ProductImageVO" parameterType="String">
+		select
+			product_code,
+			color,
+			ord,
+			filename
+		from
+			product_image
+		where
+			product_code = #{product_code} and
+			ord = 1
+	</select>
+</mapper>

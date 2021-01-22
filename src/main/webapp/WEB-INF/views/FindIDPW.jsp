@@ -55,10 +55,10 @@
 				<div class="find-wrap">
 					<div class="find-row">
 						<div class="col1">
-							<a class="point">*</a>아이디
+							<a class="point">*</a>이메일
 						</div>
 						<div class="col2">
-							<input type="text">
+							<input type="email">
 						</div>
 					</div>
 					<div class="find-row">
@@ -75,14 +75,6 @@
 						</div>
 						<div class="col2">
 							<input type="text">
-						</div>
-					</div>
-					<div class="find-row">
-						<div class="col1">
-							<a class="point">*</a>이메일
-						</div>
-						<div class="col2">
-							<input type="email">
 						</div>
 					</div>
 				</div>

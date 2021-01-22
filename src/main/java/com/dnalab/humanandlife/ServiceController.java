@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.dnalab.humanandlife.service.NoticeService;
 import com.dnalab.humanandlife.service.UserService;
 import com.dnalab.humanandlife.vo.UserVO;
 
@@ -16,6 +17,9 @@ public class ServiceController {
 	
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	NoticeService noticeService;
 	
 	@RequestMapping(value = "login")
 	public ModelAndView login(ModelAndView mv, HttpServletRequest request, UserVO vo, String inputType) {

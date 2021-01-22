@@ -32,6 +32,7 @@ public class UserServiceImpl implements UserService{
 		if(vo != null) {
 			if(passwordEncoder.matches(password, vo.getPassword())) {
 				request.getSession().setAttribute("logEmail", vo.getEmail());
+				request.getSession().setAttribute("authority", vo.getAuthority());
 			}else {
 				return 1;
 			}

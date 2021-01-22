@@ -8,70 +8,34 @@
 <title>HumanandLife</title>
 <link rel="stylesheet" type="text/css" href="/resources/css/Home.css?ver=<%= System.currentTimeMillis()%>">
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script src="/resources/script/home.js?ver=<%= System.currentTimeMillis()%>"></script>
 </head>
 <body>
 	<div id="wrap">
 		<jsp:include page="Header.jsp"></jsp:include>
-		<div class="home">
+		<div class="home" id="contents">
 			<div class="container">
-				<div class="home-promotion">
-					<div class="home-promotion-image">
-						<img src="/resources/image/promotion/promotion.png" width="100%" height="100%">
-					</div>
-					<div class="home-promotion-text">
-						<div class="promotion-title">
-							겨울세일 최대 70% 할인
-						</div>
-						<div class="promotion-content">
-							약 200여개의 제품을 최대 70%까지 할인된 가격으로 만나보세요! 올 겨울 집안 곳곳을 나만의 감각으로 채울 수 있는 기회! 작은 변화로 색다른 분위기를 만들어 연말연시 집에서 따뜻한 추억을 만들어보세요!
-						</div>
-						<a href="#">
-							<button class="promotion-button">자세히보기</button>
-						</a>
-					</div>
+				<div class="banner-wrap" id="main_banner1_wrap">
+					<ul class="banner" id="main_banner1"></ul>
+					<ul class="banner-page" id="main_banner1_page"></ul>
+					<button class="banner-button left" id="main_banner1_left">
+						<svg style="transform: rotate(270deg); filter: invert(50%);" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+							<path fill-rule="evenodd" clip-rule="evenodd" d="M12.0003 6.93872L20.0011 14.9399L18.5868 16.3541L12.0002 9.7671L5.41339 16.353L3.99927 14.9387L12.0003 6.93872Z"></path>
+						</svg>
+					</button>
+					<button class="banner-button right" id="main_banner1_right">
+						<svg style="transform: rotate(90deg); filter: invert(50%);" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+							<path fill-rule="evenodd" clip-rule="evenodd" d="M12.0003 6.93872L20.0011 14.9399L18.5868 16.3541L12.0002 9.7671L5.41339 16.353L3.99927 14.9387L12.0003 6.93872Z"></path>
+						</svg>
+					</button>
 				</div>
-				<div class="home-content">
-					<div class="home-content-inner-wrap">
-						<div class="home-content-inner">
-							<div class="notice-header">
-								공지사항
-								<a style="float: right;" href="#">더보기</a>
-							</div>
-							<div class="notice-content">
-								<c:forEach begin="1" end="6">
-								<div class="notice-content-row">
-									<div class="notice-title">
-										<a href="#">test</a>
-									</div>
-									<div class="notice-regdate">
-										<a href="#">2021-01-07</a>
-									</div>
-								</div>
-								</c:forEach>
-							</div>
-						</div>
-					</div>
-					<div class="home-content-inner-wrap">
-						<div class="home-content-inner">
-							<iframe width="100%" height="100%"
-								src="https://www.youtube.com/embed/CIMfxqqsiBA"
-								frameborder="0"
-								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-								allowfullscreen>
-							</iframe>
-						</div>
-					</div>
-					<div class="home-content-inner-wrap">
-						<div class="home-content-inner">
-							<div class="product-search">
-								<a href="#"><img src="/resources/image/home/product-search.png" title="제품찾기" alt="제품찾기" width="100%" height="100%"></a>
-							</div>
-							<div class="service-center">
-								<a href="#"><img src="/resources/image/home/service-center.png" title="고객센터" alt="고객센터" width="100%" height="100%"></a>
-							</div>
-						</div>
-					</div>
-				</div>
+				베스트 리스트<br>
+				<c:forEach var="list" items="${main.get('best').storeList}">
+					<c:forEach var="imagelist" items="${main.get('best').productImageMap.get(list.product_code)}">
+						${imagelist.filename}<br>
+					</c:forEach>
+				</c:forEach>
+				스토어 리스트<br>
 			</div>
 		</div>
 		<jsp:include page="Footer.jsp"></jsp:include>

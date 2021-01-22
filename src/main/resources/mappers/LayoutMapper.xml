@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="humanandlife.mappers.LayoutMapper">
+	<select id="getBannerList" resultType="com.dnalab.humanandlife.vo.BannerVO">
+		select
+			banner_id,
+			ord,
+			filename,
+			speed,
+			banner_name
+		from
+			banner
+		where
+			banner_id = #{banner_id}
+		order by ord asc
+	</select>
+</mapper>

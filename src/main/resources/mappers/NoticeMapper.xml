@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="humanandlife.mappers.NoticeMapper">
+	<select id="searchList" resultType="com.dnalab.humanandlife.vo.NoticeVO">
+		select
+			n.seq,
+			n.title,
+			n.content,
+			n.writer,
+			DATE_FORMAT(n.regdate, '%Y-%m-%d') as regdate
+		from
+			(select
+				seq,
+				title,
+				content,
+				writer,
+				regdate
+			from
+				notice
+			where
+				seq > 0 and
+			(<include refid="search"></include>)) as n
+		order by seq desc limit #{start}, #{perPage}
+	</select>
+	
+	<select id="getSearchTotalRow" resultType="int">
+		select
+			count(*)
+		from
+			notice
+		where
+			seq > 0 and
+			(<include refid="search"></include>)
+	</select>
+	
+	<sql id="search">
+		title like CONCAT(CONCAT('%',#{keyword}),'%') or
+	 	content like CONCAT(CONCAT('%',#{keyword}),'%')
+	</sql>
+	
+	<select id="selectOne" resultType="com.dnalab.humanandlife.vo.NoticeVO">
+		select
+			seq,
+			title,
+			content,
+			writer,
+			regdate
+		from
+			notice
+		where
+			seq = #{seq}
+	</select>
+</mapper>
