@@ -3,8 +3,21 @@
 .home .banner-wrap .banner{list-style: none; padding: 0; margin: 0;}
 .home .banner-wrap .banner li{float: left;}
 .home .banner-wrap .banner-page{list-style: none; position: absolute; display: flex; bottom: 10px; width: 100%; padding: 0; margin: 0; justify-content: center;}
-.home .banner-wrap .banner-page .name{display: inline-block; padding: 0.5em 1em; background-color: rgba(255,255,255,1); margin-right: 20px; cursor: pointer;}
+.home .banner-wrap .banner-page .name{display: inline-block; padding: 0.5em 1em; background-color: rgba(255,255,255,1); margin-right: 20px; cursor: pointer; font-size: 16px;}
 .home .banner-wrap .banner-page .active-name{background-color: rgba(0,112,192,1); color: white;}
 .home .banner-wrap .banner-button{position: absolute; width: 50px; height: 50px; background-color: rgba(0,0,0,0); border: none; outline: none; cursor: pointer;}
 .home .banner-wrap .left{left: 0; top: calc((100% - 50px) / 2);}
 .home .banner-wrap .right{right: 0; top: calc((100% - 50px) / 2);}
+
+.home .list-button{padding: 1em 0; text-align: center; font-size: 30px;}
+.home .list-button span{margin-right: 50px; cursor: pointer;}
+.home .list-button .end{margin: 0;}
+.home .list-button .active{border-bottom: 3px solid rgb(0,119,164); color:rgb(0,119,164); font-weight: 700;}
+
+@media(max-width: 1200px){
+	.home .banner-wrap .banner-page .name{font-size: 12px;}
+}
+
+@media(max-width: 600px){
+	.home .banner-wrap .banner-page .name{font-size: 8px;}
+}

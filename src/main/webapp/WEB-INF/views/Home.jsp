@@ -7,7 +7,10 @@
 <meta charset="UTF-8">
 <title>HumanandLife</title>
 <link rel="stylesheet" type="text/css" href="/resources/css/Home.css?ver=<%= System.currentTimeMillis()%>">
+<link rel="stylesheet" type="text/css" href="/resources/css/Product.css?ver=<%= System.currentTimeMillis()%>">
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script src="/resources/script/DecimalFormat.js"></script>
+<script src="/resources/script/product.js?ver=<%= System.currentTimeMillis()%>"></script>
 <script src="/resources/script/home.js?ver=<%= System.currentTimeMillis()%>"></script>
 </head>
 <body>
@@ -29,13 +32,11 @@
 						</svg>
 					</button>
 				</div>
-				베스트 리스트<br>
-				<c:forEach var="list" items="${main.get('best').storeList}">
-					<c:forEach var="imagelist" items="${main.get('best').productImageMap.get(list.product_code)}">
-						${imagelist.filename}<br>
-					</c:forEach>
-				</c:forEach>
-				스토어 리스트<br>
+				<div class="list-button">
+					<span class="getlist" id="Best">Best</span><span class="getlist end" id="New">New</span>
+				</div>
+				<ul class="product-list"></ul>
+				
 			</div>
 		</div>
 		<jsp:include page="Footer.jsp"></jsp:include>

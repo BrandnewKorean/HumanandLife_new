@@ -21,9 +21,6 @@ public class HomeController {
 	
 	@RequestMapping(value = {"","/home"})
 	public ModelAndView home(ModelAndView mv, Search search) {
-		search.setKeyword("");
-		search.setPerPage(4);
-		mv.addObject("main", storeService.getMainList(search));
 		mv.setViewName("Home");
 		return mv;
 	}

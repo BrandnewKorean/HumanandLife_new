@@ -42,8 +42,8 @@
 	</sql>
 	
 	<sql id="order">
-		<if test="orderby == 'count desc'">order by count desc</if>
-		<if test="orderby == 'seq desc'">order by seq desc</if>
+		<if test="vo.orderby == 'count desc'">order by count desc</if>
+		<if test="vo.orderby == 'seq desc'">order by seq desc</if>
 	</sql>
 	
 	<select id="getThumbnailList" resultType="com.dnalab.humanandlife.vo.ProductImageVO" parameterType="String">
@@ -57,5 +57,49 @@
 		where
 			product_code = #{product_code} and
 			ord = 1
+	</select>
+	
+	<select id="getEvent" resultType="com.dnalab.humanandlife.vo.ProductEventVO">
+		select
+			e.seq,
+			e.product_code,
+			e.name,
+			e.category,
+			e.regdate,
+			e.startdate,
+			e.enddate,
+			e.isstart,
+			e.ispersent,
+			e.persent,
+			e.rounds,
+			e.isdiscount,
+			e.discount
+		from
+			(select
+				seq,
+				product_code,
+				name,
+				category,
+				regdate,
+				startdate,
+				enddate,
+				isstart,
+				ispersent,
+				persent,
+				rounds,
+				isdiscount,
+				discount
+			from
+				product_event
+			where
+				seq = (
+					select
+						max(seq)
+					from
+						product_event
+					where
+						product_code = #{product_code}
+				)
+			) as e
 	</select>
 </mapper>

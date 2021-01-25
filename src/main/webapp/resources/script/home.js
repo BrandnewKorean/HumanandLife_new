@@ -176,4 +176,27 @@ $(function(){
 			});
 		}
 	});
+	
+	$('.getlist').click(function(){
+		$('.getlist').removeClass('active');
+		$(this).addClass('active');
+		
+		var data = {};
+		
+		if($(this).attr('id') == 'Best'){
+			data = {
+				orderby: "count desc",
+				main_category: "Best"
+			};
+		}else{
+			data = {
+				orderby: "seq desc",
+				main_category: "New"
+			};
+		}
+		
+		getProduct(data);
+	});
+	
+	$('#Best').click();
 });

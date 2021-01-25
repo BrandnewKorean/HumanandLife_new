@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.dnalab.humanandlife.dao.StoreDAO;
+import com.dnalab.humanandlife.vo.ProductEventVO;
 import com.dnalab.humanandlife.vo.ProductImageVO;
 import com.dnalab.humanandlife.vo.StoreVO;
 
@@ -27,5 +28,10 @@ public class StoreDAOImpl implements StoreDAO{
 	@Override
 	public List<ProductImageVO> getThumbnailList(String product_code) {
 		return sqlsession.selectList(NS+"getThumbnailList", product_code);
+	}
+
+	@Override
+	public ProductEventVO getEvent(ProductEventVO vo) {
+		return sqlsession.selectOne(NS+"getEvent", vo);
 	}
 }

@@ -34,6 +34,7 @@ body{
 	background-color: rgba(0,0,0,0.5);
 	z-index: 10000;
 }
+
 @media(max-width: 1200px){
 	.container{
 		width: calc(100% - 1em * 2);

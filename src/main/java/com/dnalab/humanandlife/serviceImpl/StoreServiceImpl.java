@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.dnalab.humanandlife.dao.StoreDAO;
 import com.dnalab.humanandlife.service.StoreService;
+import com.dnalab.humanandlife.vo.ProductEventVO;
 import com.dnalab.humanandlife.vo.ProductImageVO;
 import com.dnalab.humanandlife.vo.Search;
 import com.dnalab.humanandlife.vo.StoreContentVO;
@@ -23,54 +24,53 @@ public class StoreServiceImpl implements StoreService{
 	StoreDAO dao;
 
 	@Override
-	public Map<String, Object> getMainList(Search search) {
-		StoreVO vo = new StoreVO();
+	public Map<String, Object> getProductList(Search search, StoreVO vo) {
 		Map<String, Object> param = new HashMap<String, Object>();
 		Map<String, Object> result = new HashMap<String, Object>();
 		
-		StoreContentVO bestVO = new StoreContentVO();
-		StoreContentVO newVO = new StoreContentVO();
+		StoreContentVO VO = new StoreContentVO();
 		
-		vo.setMain_category("Best");
 		param.put("search", search);
 		param.put("vo", vo);
 		param.put("orderby", "count desc");
 		
-		List<StoreVO> bestlist = new ArrayList<StoreVO>();
-		bestlist = dao.getList(param);
+		List<StoreVO> list = new ArrayList<StoreVO>();
+		list = dao.getList(param);
 		
-		Map<String, List<ProductImageVO>> bestImageMap = new HashMap<String, List<ProductImageVO>>();
+		Map<String, List<ProductImageVO>> ImageMap = new HashMap<String, List<ProductImageVO>>();
+		List<ProductEventVO> eventList = new ArrayList<ProductEventVO>();
 		
-		for(int i=0;i<bestlist.size();i++) {
+		for(int i=0;i<list.size();i++) {
 			List<ProductImageVO> imagelist = new ArrayList<ProductImageVO>();
-			imagelist = dao.getThumbnailList(bestlist.get(i).getProduct_code());
 			
-			bestImageMap.put(bestlist.get(i).getProduct_code(), imagelist);
+			imagelist = dao.getThumbnailList(list.get(i).getProduct_code());
+			
+			ImageMap.put(list.get(i).getProduct_code(), imagelist);
+			
+			ProductEventVO event = new ProductEventVO();
+			event.setProduct_code(list.get(i).getProduct_code());
+			event = dao.getEvent(event);
+			
+			if(event != null) {
+				int event_price = list.get(i).getPrice();
+				
+				if(event.isIspersent()) {
+					event_price = Math.round((list.get(i).getPrice()*((float)(100 - event.getPersent())/100))/event.getRounds())*event.getRounds();
+				}else if(event.isIsdiscount()) {
+					event_price = list.get(i).getPrice() - event.getDiscount();
+				}
+				
+				list.get(i).setEvent_price(event_price);
+			}
+			
+			eventList.add(event);
 		}
 		
-		vo.setMain_category("New");
-		param.put("orderby", "seq asc");
+		VO.setStoreList(list);
+		VO.setProductImageMap(ImageMap);
+		VO.setEventList(eventList);
 		
-		List<StoreVO> newlist = new ArrayList<StoreVO>();
-		newlist = dao.getList(param);
-		
-		Map<String, List<ProductImageVO>> newImageMap = new HashMap<String, List<ProductImageVO>>();
-		
-		for(int i=0;i<newlist.size();i++) {
-			List<ProductImageVO> imagelist = new ArrayList<ProductImageVO>();
-			imagelist = dao.getThumbnailList(newlist.get(i).getProduct_code());
-			
-			newImageMap.put(newlist.get(i).getProduct_code(), imagelist);
-		}
-		
-		bestVO.setStoreList(bestlist);
-		bestVO.setProductImageMap(bestImageMap);
-		
-		newVO.setStoreList(newlist);
-		newVO.setProductImageMap(newImageMap);
-		
-		result.put("best", bestVO);
-		result.put("new", newVO);
+		result.put("vo", VO);
 		
 		return result;
 	}

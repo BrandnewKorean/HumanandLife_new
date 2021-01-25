@@ -9,6 +9,8 @@ public class StoreVO {
 	private int count;
 	private boolean isnew;
 	private boolean iscolor;
+	private String orderby;
+	private int event_price;
 	
 	public int getSeq() {
 		return seq;
@@ -58,10 +60,23 @@ public class StoreVO {
 	public void setIscolor(boolean iscolor) {
 		this.iscolor = iscolor;
 	}
-
+	public String getOrderby() {
+		return orderby;
+	}
+	public void setOrderby(String orderby) {
+		this.orderby = orderby;
+	}
+	public int getEvent_price() {
+		return event_price;
+	}
+	public void setEvent_price(int event_price) {
+		this.event_price = event_price;
+	}
+	
 	@Override
 	public String toString() {
 		return "StoreVO [seq=" + seq + ", main_category=" + main_category + ", product_code=" + product_code + ", name="
-				+ name + ", price=" + price + ", count=" + count + ", isnew=" + isnew + ", iscolor=" + iscolor + "]";
+				+ name + ", price=" + price + ", count=" + count + ", isnew=" + isnew + ", iscolor=" + iscolor
+				+ ", orderby=" + orderby + ", event_price=" + event_price + "]";
 	}
 }

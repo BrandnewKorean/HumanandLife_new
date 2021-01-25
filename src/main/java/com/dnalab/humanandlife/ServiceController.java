@@ -8,7 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.dnalab.humanandlife.service.NoticeService;
+import com.dnalab.humanandlife.service.StoreService;
 import com.dnalab.humanandlife.service.UserService;
+import com.dnalab.humanandlife.vo.Search;
+import com.dnalab.humanandlife.vo.StoreVO;
 import com.dnalab.humanandlife.vo.UserVO;
 
 @RequestMapping(value = "/service")
@@ -20,6 +23,9 @@ public class ServiceController {
 	
 	@Autowired
 	NoticeService noticeService;
+	
+	@Autowired
+	StoreService storeService; 
 	
 	@RequestMapping(value = "login")
 	public ModelAndView login(ModelAndView mv, HttpServletRequest request, UserVO vo, String inputType) {
@@ -38,6 +44,15 @@ public class ServiceController {
 	@RequestMapping(value = "logout")
 	public ModelAndView logout(ModelAndView mv, HttpServletRequest request) {
 		mv.addObject("code", userService.logout(request));
+		mv.setViewName("jsonView");
+		return mv;
+	}
+	
+	@RequestMapping(value = "getProductList")
+	public ModelAndView getProductList(ModelAndView mv, Search search, StoreVO vo) {
+		search.setKeyword("");
+		search.setPerPage(4);
+		mv.addObject("product", storeService.getProductList(search, vo));
 		mv.setViewName("jsonView");
 		return mv;
 	}
