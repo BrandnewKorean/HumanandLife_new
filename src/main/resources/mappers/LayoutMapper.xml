@@ -17,4 +17,23 @@
 			banner_id = #{banner_id}
 		order by ord asc
 	</select>
+	
+	<select id="getCategoryList" resultType="com.dnalab.humanandlife.vo.CategoryVO">
+		select
+			ord,
+			main_category,
+			sub_category,
+			href
+		from
+			category
+	</select>
+	
+	<select id="getHeaderBannerList" resultType="com.dnalab.humanandlife.vo.HeaderBannerVO">
+		select
+			seq,
+			name,
+			href
+		from
+			header_banner
+	</select>
 </mapper>

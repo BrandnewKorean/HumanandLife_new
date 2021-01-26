@@ -31,16 +31,8 @@ public class HomeController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "/join-terms")
-	public ModelAndView terms(ModelAndView mv) {
-		mv.setViewName("Terms");
-		return mv;
-	}
-	
 	@RequestMapping(value = "/join-page")
-	public ModelAndView joinpage(ModelAndView mv, boolean use, boolean privacy) {
-		mv.addObject("use", use);
-		mv.addObject("privacy", privacy);
+	public ModelAndView joinpage(ModelAndView mv) {
 		mv.setViewName("Join");
 		return mv;
 	}

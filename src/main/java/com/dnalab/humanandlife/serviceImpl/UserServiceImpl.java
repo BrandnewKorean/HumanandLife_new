@@ -20,14 +20,10 @@ public class UserServiceImpl implements UserService{
 	BCryptPasswordEncoder passwordEncoder;
 
 	@Override
-	public int login(HttpServletRequest request, UserVO vo, String inputType) {
+	public int login(HttpServletRequest request, UserVO vo) {
 		String password = vo.getPassword();
 		
-		if(inputType.equals("email")) {
-			vo = dao.selectOnebyEmail(vo);
-		}else {
-			vo = dao.selectOnebyPhone(vo);
-		}
+		vo = dao.selectOnebyEmail(vo);
 		
 		if(vo != null) {
 			if(passwordEncoder.matches(password, vo.getPassword())) {

@@ -23,21 +23,35 @@
 			</div>
 			<button id="admin-top-open">열기</button>
 		</c:if>
+		<div class="event-wrap"></div>
 		<div class="container">
 			<div class="top-menu">
-				<a id="header-menu"><img class="icon" src="/resources/image/header/menu.png"></a>
+				<div class="left">
+					<a id="header-menu"><img class="icon" src="/resources/image/header/menu.png"></a>
+					<a href="/home"><img src="/resources/image/header/logo.png" title="humanandlife 홈" alt="logo" width="150px"></a>
+				</div>
+				<label for="header-search">
+					<input type="search" id="header-search" list="header-search-list" placeholder="찾고 싶은 제품을 검색해보세요!">
+					<img src="/resources/image/header/search.png">
+				</label>
 				<ul>
 					<li id="header-person">
 						<c:choose>
 							<c:when test="${logEmail == null}">
-								<a href="javascript:void(0);"><img class="icon" src="/resources/image/header/person.png"></a>
+								<a href="javascript:void(0);">
+									<img class="icon" src="/resources/image/header/person.png"><br>
+									마이페이지
+								</a>
 								<ul class="submenu" id="header-person-submenu">
 									<li><a href="/login-page">로그인</a></li>
 									<li><a href="#">회원가입</a></li>
 								</ul>
 							</c:when>
 							<c:otherwise>
-								<a href="javascript:void(0);"><img class="icon" src="/resources/image/header/person_blue.png"></a>
+								<a href="javascript:void(0);">
+									<img class="icon" src="/resources/image/header/person_blue.png"><br>
+									마이페이지
+								</a>
 								<ul class="submenu" id="header-person-submenu">
 									<li><a class="logout" href="javascript: void(0);">로그아웃</a></li>
 									<li><a href="#">마이페이지</a></li>
@@ -46,38 +60,27 @@
 						</c:choose>
 					</li>
 					<li>
-						<a class="header-nav-link" href="#"><img class="icon" id="header-basket" src="/resources/image/header/basket.png"></a>
+						<a class="header-nav-link" id="header-basket" href="#">
+							<img class="icon" src="/resources/image/header/basket.png"><br>
+							장바구니
+						</a>
 					</li>
 					<li>
-						<a class="header-nav-link" href="#"><img class="icon" id="header-delivery" src="/resources/image/header/delivery.png"></a>
+						<a class="header-nav-link" id="header-delivery" href="#">
+							<img class="icon" src="/resources/image/header/delivery.png"><br>
+							배송조회
+						</a>
+					</li>
+					<li>
+						<a class="header-nav-link" id="header-wishlist" href="#">
+							<img class="icon" src="/resources/image/header/heart.png"><br>
+							위시리스트
+						</a>
 					</li>
 				</ul>
 			</div>
-			<a href="/home"><img src="/resources/image/header/logo.png" title="humanandlife 홈" alt="logo" width="150px"></a>
 			<div class="bottom-menu">
-				<ul>
-					<li class="all">
-						<a href="#">All</a>
-					</li>
-					<li>
-						<a href="#">Best</a>
-					</li>
-					<li>
-						<a href="#">New</a>
-					</li>
-					<li>
-						<a href="#">Cleanser</a>
-					</li>
-					<li>
-						<a href="#">Mask</a>
-					</li>
-					<li>
-						<a href="#">위생용품</a>
-					</li>
-					<li>
-						<a href="#">방역용품</a>
-					</li>
-				</ul>
+				<ul></ul>
 			</div>
 		</div>
 	</div>
@@ -132,6 +135,9 @@
 				</div>
 			</div>
 		</div>
+	</div>
+	<div class="modal" id="product-modal">
+		
 	</div>
 </body>
 </html>

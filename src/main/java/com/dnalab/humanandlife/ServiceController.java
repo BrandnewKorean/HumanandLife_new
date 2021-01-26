@@ -25,11 +25,11 @@ public class ServiceController {
 	NoticeService noticeService;
 	
 	@Autowired
-	StoreService storeService; 
+	StoreService storeService;
 	
 	@RequestMapping(value = "login")
-	public ModelAndView login(ModelAndView mv, HttpServletRequest request, UserVO vo, String inputType) {
-		mv.addObject("code", userService.login(request, vo, inputType));
+	public ModelAndView login(ModelAndView mv, HttpServletRequest request, UserVO vo) {
+		mv.addObject("code", userService.login(request, vo));
 		mv.setViewName("jsonView");
 		return mv;
 	}

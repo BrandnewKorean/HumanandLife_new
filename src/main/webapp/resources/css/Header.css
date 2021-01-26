@@ -5,20 +5,34 @@
 #header .admin-top button{border: none; padding: 1em; margin: 0; background-color: rgba(0,0,0,0); color: white; outline: none; cursor: pointer;}
 #header #admin-top-open{display: none; position: absolute; right: 10px; top: calc(16px + 1em * 2); background-color: rgb(38,38,38); color: white; border:none; padding: 0 3em; border-radius: 0 0 1em 1em; outline: none; cursor: pointer;}
 
-#header .top-menu #header-menu{float: left; cursor: pointer;}
-#header .top-menu ul{display: block; padding: 0; margin: 0; list-style: none; text-align: right;}
+#header .event{background-color: rgb(0,112,196); padding: 0.5em 0; height: 18px;}
+#header .event .event-list{list-style: none; padding: 0; margin: 0;}
+#header .event .event-list li{display: none;}
+#header .event .event-list #header-event0{display: block;}
+#header .event .event-list li a{text-decoration: none; color: white;}
+#header .event .event-list li a:hover{text-decoration: underline;}
+
+#header .top-menu{display: flex; text-align: left; align-items: center; padding: 1em 0;}
+#header .top-menu .left{width: 300px;}
+#header .top-menu #header-menu{cursor: pointer; margin-right: 50px;}
+
+#header .top-menu label{display: flex; width: calc(100% - 300px - 250px - 1px * 2); align-items: center; border: 1px solid gray; padding: 0.5em 0;}
+#header .top-menu label #header-search{width: calc(100% - 24px); border: none; outline: none;}
+#header .top-menu label img{width: 24px; height: 24px;}
+
+#header .top-menu ul{position: absolute; width: 250px; right:0; padding: 0; margin: 0; list-style: none; text-align: right;}
 #header .top-menu ul li{position: relative; display: inline-block;}
-#header .top-menu ul li a{text-decoration: none;color: black;}
+#header .top-menu ul li a{display: block; text-decoration: none; color: black; text-align: center; line-height: 0.5; font-size: 12px;}
 #header .top-menu ul li a:hover{font-weight: bold;}
 #header .top-menu .icon{width: 50px; height: 50px;}
 
-#header .top-menu .submenu{display: none; position: absolute; right: 0; top: 50px; width: 100px; text-align:center; box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.2); background-color: white;}
+#header .top-menu .submenu{display: none; position: absolute; right: 0; top: 45px; width: 100px; text-align:center; box-shadow: 0px 0px 3px 3px rgba(0,0,0,0.2); background-color: white;}
 #header .top-menu .submenu li{display: block;}
-#header .top-menu .submenu li a{display: block; color: black; padding: 0.5em 0;}
+#header .top-menu .submenu li a{display: block; color: black; padding: 0.5em 0; font-size: 16px;}
 #header .top-menu .submenu li a:hover{background-color: rgb(0,112,196); color: white;}
 
 #header .bottom-menu{display: block;}
-#header .bottom-menu ul{padding: 0; margin: 0;	list-style: none;text-align: center; padding: 15px 0;}
+#header .bottom-menu ul{padding: 0; margin: 0;	list-style: none; text-align: center; padding: 15px 0; font-size: 20px;}
 #header .bottom-menu ul li{display: inline-block; padding: 0 1em; border-left: 2px solid black;}
 #header .bottom-menu ul .all{border-left: none;} 
 #header .bottom-menu ul li a{text-decoration: none; color: black; font-weight: 500;}
@@ -35,7 +49,7 @@
 
 @media(max-width: 1200px){
 	#header .top-menu .icon{width: 35px; height: 35px;}
-	#header .top-menu .submenu{top: 35px;}
+	#header .top-menu .submenu{top: 30px;}
 	
 	#header-menu-modal .inner .list-all{flex-direction: column;}
 	#header-menu-modal .inner .list-all .list-wrap{margin-right: 0; margin-bottom: 30px;}
@@ -43,4 +57,13 @@
 	#header-menu-modal .inner .list-all .list-wrap .title{cursor: pointer;}
 	
 	#header .bottom-menu{display: none;}
+}
+
+@media(max-width: 600px){
+	#header .top-menu{flex-direction: column;}
+	#header .top-menu .left{width: 100%;}
+	
+	#header .top-menu label{width: 100%;}
+	
+	#header .top-menu ul{display: none;}
 }

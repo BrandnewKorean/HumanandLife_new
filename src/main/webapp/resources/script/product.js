@@ -26,13 +26,13 @@ function getProduct(data){
 				
 				if(eventlist[i] != null){
 					if(eventlist[i]['ispersent']){
-						eventString = '<div class="event-box">'+eventlist[i]['category']+'<br>'+eventlist[i]['persent']+'%';
+						eventString = '<div class="event-box">'+eventlist[i]['category']+'<br>'+eventlist[i]['persent']+'%'+'</div>';
 						textString = '<a class="name">'+list[i]['name']+'</a><br><a class="price">'+df.format(list[i]['event_price'])+'원</a><br><a class="original-price">'+df.format(list[i]['price'])+'원</a>';
 					}else if(eventlist[i]['isdiscount']){
-						eventString = '<div class="event-box">'+eventlist[i]['category']+'<br>'+df.format(eventlist[i]['discount']);
+						eventString = '<div class="event-box">'+eventlist[i]['category']+'<br>'+df.format(eventlist[i]['discount'])+'</div>';
 						textString = '<a class="name">'+list[i]['name']+'</a><br><a class="price">'+df.format(list[i]['event_price'])+'원</a><br><a class="original-price">'+df.format(list[i]['price'])+'원</a>';
 					}else{
-						eventString = '<div class="event-box">'+eventlist[i]['category']+'<br>EVENT';
+						eventString = '<div class="event-box">'+eventlist[i]['category']+'<br>EVENT</div>';
 						textString = '<a class="name">'+list[i]['name']+'</a><br><a class="price">'+df.format(list[i]['price'])+'원</a>';
 					}
 				}else{
@@ -65,8 +65,8 @@ function getProduct(data){
 						+'<div class="inner-modal" id="product-modal'+i+'">'
 							+'<div class="button-wrap">'
 								+'<button class="buy">구매하기</button>'
-								+'<button><img class="icon" src="/resources/image/header/product_basket.png"></button>'
-								+'<button><img class="icon" src="/resources/image/header/heart.png"></button>'
+								+'<button><img class="icon" src="/resources/icon/product_basket.png"></button>'
+								+'<button><img class="icon" src="/resources/icon/heart.png"></button>'
 							+'</div>'
 						+'</div>'
 					+'</li>'

@@ -13,7 +13,7 @@
 				Human & Life
 			</div>
 			<ul class="link-list">
-				<li class="company"><a href="#">회사 소개</a></li>
+				<li class="company"><a href="/introduce">회사 소개</a></li>
 				<li><a href="#">이용약관</a></li>
 				<li><a href="#">개인정보처리방침</a></li>
 				<li><a href="#">쇼핑몰 이용안내</a></li>
