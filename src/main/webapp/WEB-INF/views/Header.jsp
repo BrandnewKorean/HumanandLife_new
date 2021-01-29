@@ -8,8 +8,10 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="stylesheet" type="text/css" href="/resources/css/Basic.css?ver=<%= System.currentTimeMillis()%>">
 <link rel="stylesheet" type="text/css" href="/resources/css/Header.css?ver=<%= System.currentTimeMillis()%>">
+<link rel="stylesheet" type="text/css" href="/resources/css/CustomAlert.css?ver=<%= System.currentTimeMillis()%>">
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script src="/resources/script/header.js?ver=<%= System.currentTimeMillis()%>"></script>
+<script src="/resources/script/alert.js?ver=<%= System.currentTimeMillis()%>"></script>
 </head>
 <body>
 	<div id="header">
@@ -30,10 +32,10 @@
 					<a id="header-menu"><img class="icon" src="/resources/image/header/menu.png"></a>
 					<a href="/home"><img src="/resources/image/header/logo.png" title="humanandlife 홈" alt="logo" width="150px"></a>
 				</div>
-				<label for="header-search">
-					<input type="search" id="header-search" list="header-search-list" placeholder="찾고 싶은 제품을 검색해보세요!">
-					<img src="/resources/image/header/search.png">
-				</label>
+				<div class="search-wrap" id="header-search-wrap">
+					<input type="search" id="header-search-txt" list="header-search-list" placeholder="찾고 싶은 제품을 검색해보세요!">
+					<button id="header-search"><img src="/resources/image/header/search.png"></button>
+				</div>
 				<ul>
 					<li id="header-person">
 						<c:choose>
@@ -44,7 +46,7 @@
 								</a>
 								<ul class="submenu" id="header-person-submenu">
 									<li><a href="/login-page">로그인</a></li>
-									<li><a href="#">회원가입</a></li>
+									<li><a href="/join-page">회원가입</a></li>
 								</ul>
 							</c:when>
 							<c:otherwise>
@@ -136,8 +138,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="modal" id="product-modal">
-		
-	</div>
+	<div class="modal" id="product-modal"></div>
+	<jsp:include page="CustomAlert.jsp"></jsp:include>
 </body>
 </html>

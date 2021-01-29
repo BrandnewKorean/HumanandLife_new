@@ -8,6 +8,8 @@ public class UserVO {
 	private String authority;
 	private String joindate;
 	private String recentaccess;
+	private boolean recept_email;
+	private boolean recept_sms;
 	
 	public String getEmail() {
 		return email;
@@ -51,10 +53,23 @@ public class UserVO {
 	public void setRecentaccess(String recentaccess) {
 		this.recentaccess = recentaccess;
 	}
-
+	public boolean isRecept_email() {
+		return recept_email;
+	}
+	public void setRecept_email(boolean recept_email) {
+		this.recept_email = recept_email;
+	}
+	public boolean isRecept_sms() {
+		return recept_sms;
+	}
+	public void setRecept_sms(boolean recept_sms) {
+		this.recept_sms = recept_sms;
+	}
+	
 	@Override
 	public String toString() {
 		return "UserVO [email=" + email + ", password=" + password + ", phone=" + phone + ", name=" + name
-				+ ", authority=" + authority + ", joindate=" + joindate + ", recentaccess=" + recentaccess + "]";
+				+ ", authority=" + authority + ", joindate=" + joindate + ", recentaccess=" + recentaccess
+				+ ", recept_email=" + recept_email + ", recept_sms=" + recept_sms + "]";
 	}
 }

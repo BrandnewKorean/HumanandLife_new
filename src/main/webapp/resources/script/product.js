@@ -1,10 +1,15 @@
-function getProduct(data){
+function getProduct(orderby, main_category, perPage, keyword){
 	var df = new DecimalFormat('###,###');
 	
 	$.ajax({
 		url: "/service/getProductList",
 		type: "GET",
-		data: data,
+		data: {
+			orderby: orderby,
+			main_category: main_category,
+			perPage: perPage,
+			keyword: keyword
+		},
 		beforeSend: function(){
 			$('.product-list').html(
 				'<li class="loading">'
@@ -16,6 +21,17 @@ function getProduct(data){
 			var list = data.product['vo']['storeList'];
 			var imagelist = data.product['vo']['productImageMap'];
 			var eventlist = data.product['vo']['eventList'];
+			var search = data.product['search'];
+			
+			console.log(search);
+			
+			if(keyword != ''){
+				if(list.length > 0){
+					$('#keyword-result').html('<a class="keyword">\''+search['keyword']+'\'</a> 에 관한 <a class="keyword">\''+search['totalRow']+'개\'</a>의 검색결과');
+				}else{
+					$('#keyword-result').html('<a class="keyword">\''+search['keyword']+'\'</a> 에 관한 검색결과가 없습니다.<br>다른 검색어를 입력하시거나 철자와 띄어쓰기를 확인해보세요.');
+				}
+			}
 			
 			$('.product-list').empty();
 			for(var i=0;i<list.length;i++){
@@ -60,11 +76,7 @@ function getProduct(data){
 								+textString
 							+'</div>'
 							+'<div class="button-wrap">'
-							+'</div>'
-						+'</div>'
-						+'<div class="inner-modal" id="product-modal'+i+'">'
-							+'<div class="button-wrap">'
-								+'<button class="buy">구매하기</button>'
+								+'<button class="buy" id="buy_'+list[i]['product_code']+'">구매하기</button>'
 								+'<button><img class="icon" src="/resources/icon/product_basket.png"></button>'
 								+'<button><img class="icon" src="/resources/icon/heart.png"></button>'
 							+'</div>'
@@ -107,6 +119,10 @@ function getProduct(data){
 				$(this).text('Buy');
 			},function(){
 				$(this).text('구매하기');
+			});
+			
+			$('.buy').click(function(){
+				buyProduct($(this).attr('id').replace('buy_',''));
 			});
 		}
 	});

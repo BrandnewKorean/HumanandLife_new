@@ -36,7 +36,7 @@ public class ServiceController {
 	
 	@RequestMapping(value = "join")
 	public ModelAndView join(ModelAndView mv, HttpServletRequest request, UserVO vo) {
-		mv.addObject("code", userService.join(vo));
+		mv.addObject("code", userService.join(request, vo));
 		mv.setViewName("jsonView");
 		return mv;
 	}
@@ -48,11 +48,23 @@ public class ServiceController {
 		return mv;
 	}
 	
+	@RequestMapping(value = "duplicateCheck")
+	public ModelAndView duplicateCheck(ModelAndView mv, UserVO vo) {
+		mv.addObject("code", userService.duplicateCheck(vo));
+		mv.setViewName("jsonView");
+		return mv;
+	}
+	
 	@RequestMapping(value = "getProductList")
 	public ModelAndView getProductList(ModelAndView mv, Search search, StoreVO vo) {
-		search.setKeyword("");
-		search.setPerPage(4);
 		mv.addObject("product", storeService.getProductList(search, vo));
+		mv.setViewName("jsonView");
+		return mv;
+	}
+	
+	@RequestMapping(value = "getProduct")
+	public ModelAndView getProduct(ModelAndView mv, StoreVO vo) {
+		mv.addObject("product", storeService.getProduct(vo));
 		mv.setViewName("jsonView");
 		return mv;
 	}

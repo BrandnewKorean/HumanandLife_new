@@ -37,6 +37,19 @@
 		limit #{search.start}, #{search.perPage}
 	</select>
 	
+	<select id="getTotalRow" resultType="int" parameterType="map">
+		select
+			count(*)
+		from
+			store s,
+			product p
+		where
+			seq > 0 and
+			main_category = #{vo.main_category} and
+			s.product_code = p.product_code and
+			(<include refid="search"></include>)
+	</select>
+	
 	<sql id="search">
 		p.name like CONCAT(CONCAT('%',#{search.keyword}),'%')
 	</sql>
@@ -101,5 +114,68 @@
 						product_code = #{product_code}
 				)
 			) as e
+	</select>
+	
+	<select id="getOne" resultType="com.dnalab.humanandlife.vo.StoreVO">
+		select
+			s.seq,
+			s.product_code,
+			p.name,
+			p.price,
+			p.count,
+			p.isnew,
+			p.iscolor
+		from
+			store s,
+			product p
+		where
+			seq > 0 and
+			main_category = 'All' and
+			s.product_code = #{product_code} and
+			p.product_code = #{product_code}
+	</select>
+	
+	<select id="getImageList" resultType="com.dnalab.humanandlife.vo.ProductImageVO" parameterType="String">
+		select
+			product_code,
+			color,
+			ord,
+			filename
+		from
+			product_image
+		where
+			product_code = #{product_code}
+	</select>
+	
+	<select id="getNessOptionList" resultType="com.dnalab.humanandlife.vo.ProductOptionVO" parameterType="String">
+		select
+			product_code,
+			depth,
+			name,
+			price_plus,
+			additional,
+			option_name
+		from
+			product_option
+		where
+			additional = 0 and
+			product_code = #{product_code}
+		order by depth asc, price_plus asc, name asc
+	</select>
+	
+	<select id="getAddOptionList" resultType="com.dnalab.humanandlife.vo.ProductOptionVO" parameterType="String">
+		select
+			product_code,
+			depth,
+			name,
+			price_plus,
+			additional,
+			option_name
+		from
+			product_option
+		where
+			additional = 1 and
+			product_code = #{product_code}
+		order by depth asc, price_plus asc, name asc
 	</select>
 </mapper>

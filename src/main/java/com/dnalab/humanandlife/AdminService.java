@@ -12,6 +12,7 @@ import com.dnalab.humanandlife.dao.LayoutDAO;
 import com.dnalab.humanandlife.vo.BannerVO;
 import com.dnalab.humanandlife.vo.CategoryVO;
 import com.dnalab.humanandlife.vo.HeaderBannerVO;
+import com.dnalab.humanandlife.vo.YoutubeVO;
 
 @RequestMapping(value = "/admin")
 @Controller
@@ -49,6 +50,16 @@ public class AdminService {
 		list = layout.getHeaderBannerList();
 		
 		mv.addObject("list", list);
+		mv.setViewName("jsonView");
+		return mv;
+	}
+	
+	@RequestMapping(value = "getYoutube")
+	public ModelAndView getYoutube(ModelAndView mv) {
+		YoutubeVO vo = new YoutubeVO();
+		vo = layout.getYoutube();
+		
+		mv.addObject("vo", vo);
 		mv.setViewName("jsonView");
 		return mv;
 	}

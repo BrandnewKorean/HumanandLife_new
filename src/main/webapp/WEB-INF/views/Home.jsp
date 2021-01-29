@@ -5,13 +5,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>HumanandLife</title>
 <link rel="stylesheet" type="text/css" href="/resources/css/Home.css?ver=<%= System.currentTimeMillis()%>">
 <link rel="stylesheet" type="text/css" href="/resources/css/Product.css?ver=<%= System.currentTimeMillis()%>">
+<link rel="stylesheet" type="text/css" href="/resources/css/CustomAlert.css?ver=<%= System.currentTimeMillis()%>">
+<title>HumanandLife</title>
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script src="/resources/script/DecimalFormat.js"></script>
 <script src="/resources/script/product.js?ver=<%= System.currentTimeMillis()%>"></script>
 <script src="/resources/script/home.js?ver=<%= System.currentTimeMillis()%>"></script>
+<script src="/resources/script/alert.js?ver=<%= System.currentTimeMillis()%>"></script>
 </head>
 <body>
 	<div id="wrap">
@@ -36,9 +38,12 @@
 					<span class="getlist" id="Best">Best</span><span class="getlist end" id="New">New</span>
 				</div>
 				<ul class="product-list"></ul>
-				
+				<div class="video-wrap">
+					<iframe class="video" id="main-youtube" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+				</div>
 			</div>
 		</div>
+		<jsp:include page="CustomAlert.jsp"></jsp:include>
 		<jsp:include page="Footer.jsp"></jsp:include>
 	</div>
 </body>

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.dnalab.humanandlife.dao.StoreDAO;
 import com.dnalab.humanandlife.vo.ProductEventVO;
 import com.dnalab.humanandlife.vo.ProductImageVO;
+import com.dnalab.humanandlife.vo.ProductOptionVO;
 import com.dnalab.humanandlife.vo.StoreVO;
 
 @Repository
@@ -24,6 +25,11 @@ public class StoreDAOImpl implements StoreDAO{
 	public List<StoreVO> getList(Map<String, Object> param) {
 		return sqlsession.selectList(NS+"getList", param);
 	}
+	
+	@Override
+	public int getTotalRow(Map<String, Object> param) {
+		return sqlsession.selectOne(NS+"getTotalRow", param);
+	}
 
 	@Override
 	public List<ProductImageVO> getThumbnailList(String product_code) {
@@ -33,5 +39,25 @@ public class StoreDAOImpl implements StoreDAO{
 	@Override
 	public ProductEventVO getEvent(ProductEventVO vo) {
 		return sqlsession.selectOne(NS+"getEvent", vo);
+	}
+
+	@Override
+	public StoreVO getOne(StoreVO vo) {
+		return sqlsession.selectOne(NS+"getOne", vo);
+	}
+
+	@Override
+	public List<ProductImageVO> getImageList(String product_code) {
+		return sqlsession.selectList(NS+"getImageList", product_code);
+	}
+
+	@Override
+	public List<ProductOptionVO> getNessOptionList(String product_code) {
+		return sqlsession.selectList(NS+"getNessOptionList", product_code);
+	}
+
+	@Override
+	public List<ProductOptionVO> getAddOptionList(String product_code) {
+		return sqlsession.selectList(NS+"getAddOptionList", product_code);
 	}
 }

@@ -40,14 +40,12 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public int join(UserVO vo) {
+	public int join(HttpServletRequest request, UserVO vo) {
 		UserVO user = new UserVO();
 		user = dao.selectOnebyEmail(vo);
+		
 		if(user != null) {
 			return 2;
-		}else {
-			user = dao.selectOnebyPhone(vo);
-			if(user != null) return 2;
 		}
 		
 		String password = vo.getPassword();
@@ -57,10 +55,14 @@ public class UserServiceImpl implements UserService{
 		int result = dao.insert(vo);
 		
 		if(result > 0) {
-			return 0;
+			vo = dao.selectOnebyEmail(vo);
+			request.getSession().setAttribute("logEmail", vo.getEmail());
+			request.getSession().setAttribute("authority", vo.getAuthority());
 		}else {
 			return 1;
 		}
+		
+		return 0;
 	}
 
 	@Override
@@ -72,5 +74,16 @@ public class UserServiceImpl implements UserService{
 		}else {
 			return 1;
 		}
+	}
+
+	@Override
+	public int duplicateCheck(UserVO vo) {
+		vo = dao.selectOnebyEmail(vo);
+		
+		if(vo != null) {
+			return 1;
+		}
+		
+		return 0;
 	}
 }

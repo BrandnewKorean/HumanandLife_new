@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.dnalab.humanandlife.service.NoticeService;
 import com.dnalab.humanandlife.service.StoreService;
 import com.dnalab.humanandlife.vo.Search;
+import com.dnalab.humanandlife.vo.StoreVO;
 
 @Controller
 public class HomeController {
@@ -105,6 +106,39 @@ public class HomeController {
 		mv.addObject("search", search);
 		mv.addObject("vo", noticeService.getNotice(seq));
 		mv.setViewName("NoticeView");
+		return mv;
+	}
+	
+	@RequestMapping(value = "product")
+	public ModelAndView product(ModelAndView mv, StoreVO vo, Search search) {
+		if(search.getKeyword() == null) search.setKeyword("");
+		mv.addObject("search", search);
+		mv.addObject("vo", vo);
+		mv.setViewName("ProductList");
+		return mv;
+	}
+	
+	@RequestMapping(value = "/policy/use")
+	public ModelAndView termsUse(ModelAndView mv) {
+		mv.setViewName("use");
+		return mv;
+	}
+	
+	@RequestMapping(value = "/policy/trade")
+	public ModelAndView termsTrade(ModelAndView mv) {
+		mv.setViewName("trade");
+		return mv;
+	}
+	
+	@RequestMapping(value = "/policy/privacy-use")
+	public ModelAndView termsPrivacyuse(ModelAndView mv) {
+		mv.setViewName("privacyuse");
+		return mv;
+	}
+	
+	@RequestMapping(value = "/policy/privacy")
+	public ModelAndView termsPrivacy(ModelAndView mv) {
+		mv.setViewName("privacy");
 		return mv;
 	}
 }

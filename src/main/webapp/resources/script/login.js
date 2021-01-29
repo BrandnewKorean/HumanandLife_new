@@ -37,6 +37,7 @@ $(function(){
 	
 	$('#id').on('input', function(){
 		if($(this).val() == ''){
+			idCheck = false;
 			$('#id-check').text('이메일을 입력해주세요.');
 			$('#id-wrap').addClass('wrong-input');
 		}else if(!email_test.test($(this).val())){

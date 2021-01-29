@@ -10,6 +10,7 @@ import com.dnalab.humanandlife.dao.LayoutDAO;
 import com.dnalab.humanandlife.vo.BannerVO;
 import com.dnalab.humanandlife.vo.CategoryVO;
 import com.dnalab.humanandlife.vo.HeaderBannerVO;
+import com.dnalab.humanandlife.vo.YoutubeVO;
 
 @Repository
 public class LayoutDAOImpl implements LayoutDAO{
@@ -32,5 +33,10 @@ public class LayoutDAOImpl implements LayoutDAO{
 	@Override
 	public List<HeaderBannerVO> getHeaderBannerList() {
 		return sqlsession.selectList(NS+"getHeaderBannerList");
+	}
+
+	@Override
+	public YoutubeVO getYoutube() {
+		return sqlsession.selectOne(NS+"getYoutube");
 	}
 }

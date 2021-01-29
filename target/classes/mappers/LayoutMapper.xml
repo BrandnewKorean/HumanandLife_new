@@ -36,4 +36,19 @@
 		from
 			header_banner
 	</select>
+	
+	<select id="getYoutube" resultType="com.dnalab.humanandlife.vo.YoutubeVO">
+		select
+			seq,
+			src
+		from
+			youtube
+		where
+			seq = (
+				select
+					max(seq)
+				from
+					youtube
+			)
+	</select>
 </mapper>

@@ -16,9 +16,10 @@
 #header .top-menu .left{width: 300px;}
 #header .top-menu #header-menu{cursor: pointer; margin-right: 50px;}
 
-#header .top-menu label{display: flex; width: calc(100% - 300px - 250px - 1px * 2); align-items: center; border: 1px solid gray; padding: 0.5em 0;}
-#header .top-menu label #header-search{width: calc(100% - 24px); border: none; outline: none;}
-#header .top-menu label img{width: 24px; height: 24px;}
+#header .top-menu .search-wrap{display: flex; width: calc(100% - 300px - 250px - 1px * 2); align-items: center; border: 1px solid gray; padding: 0.5em 0;}
+#header .top-menu .search-wrap #header-search-txt{width: calc(100% - 24px); border: none; outline: none; font-size: 18px;}
+#header .top-menu .search-wrap button{border: none; background-color: rgba(0,0,0,0); outline: none; border-radius: 50%; cursor: pointer;}
+#header .top-menu .search-wrap button img{width: 24px; height: 24px;}
 
 #header .top-menu ul{position: absolute; width: 250px; right:0; padding: 0; margin: 0; list-style: none; text-align: right;}
 #header .top-menu ul li{position: relative; display: inline-block;}

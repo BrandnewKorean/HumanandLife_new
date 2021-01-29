@@ -139,6 +139,28 @@ $(function(){
 			$('#header-menu-modal .inner .list').show();
 		}
 	});
+	
+	$('#header-search-txt').focus(function(){
+		$('#header-search-wrap').css({
+			border: "1px solid rgb(0,112,196)"
+		});
+	});
+	
+	$('#header-search-txt').focusout(function(){
+		$('#header-search-wrap').css({
+			border: "1px solid rgb(0,0,0)"
+		});
+	});
+	
+	$('#header-search-txt').keypress(function(e){
+		if(e.keyCode == 13){
+			$('#header-search').click();
+		}
+	});
+	
+	$('#header-search').click(function(){
+		window.location.href = '/product?main_category=All&keyword='+$('#header-search-txt').val();
+	});
 });
 
 function initEvent(){

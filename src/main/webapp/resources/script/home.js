@@ -1,5 +1,13 @@
 $(function(){
 	$.ajax({
+		url: "/admin/getYoutube",
+		type: "GET",
+		success: function(data){
+			$('#main-youtube').attr('src', data.vo['src']);
+		}
+	});
+	
+	$.ajax({
 		url: "/admin/getMainBanner",
 		type: "GET",
 		data:{
@@ -10,7 +18,7 @@ $(function(){
 			
 			for(var i=0;i<list.length;i++){
 				$('#main_banner1').append(
-					'<li class="slide_content"><img src="/resources/image/home/banner/'+list[i]['filename']+'" width="100%"></li>'
+					'<li class="slide_content"><img src="/resources/image/home/banner/'+list[i]['filename']+'" width="100%" height="100%"></li>'
 				);
 			}
 			
@@ -184,18 +192,10 @@ $(function(){
 		var data = {};
 		
 		if($(this).attr('id') == 'Best'){
-			data = {
-				orderby: "count desc",
-				main_category: "Best"
-			};
+			getProduct("count desc", "Best", 4,'');
 		}else{
-			data = {
-				orderby: "seq desc",
-				main_category: "New"
-			};
+			getProduct("seq desc", "New",4,'');
 		}
-		
-		getProduct(data);
 	});
 	
 	$('#Best').click();

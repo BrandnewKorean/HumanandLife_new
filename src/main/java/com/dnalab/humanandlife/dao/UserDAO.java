@@ -6,4 +6,5 @@ public interface UserDAO {
 	UserVO selectOnebyEmail(UserVO vo);
 	UserVO selectOnebyPhone(UserVO vo);
 	int insert(UserVO vo);
+	int updateRecentAccess(UserVO vo);
 }

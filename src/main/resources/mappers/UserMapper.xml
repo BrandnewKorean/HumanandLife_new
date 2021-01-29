@@ -42,7 +42,9 @@
 				phone,
 				name,
 				authority,
-				joindate
+				joindate,
+				recept_email,
+				recept_sms
 			)
 			values(
 				#{email},
@@ -50,7 +52,18 @@
 				#{phone},
 				'${name}',
 				'ROLE_USER',
-				sysdate()
+				sysdate(),
+				#{recept_email},
+				#{recept_sms}
 			)
 	</insert>
+	
+	<update id="updateRecentAccess">
+		update
+			user
+		set
+			recentaccess = sysdate()
+		where
+			email = #{email}
+	</update>
 </mapper>

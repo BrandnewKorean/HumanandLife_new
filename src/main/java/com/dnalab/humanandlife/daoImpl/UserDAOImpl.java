@@ -29,4 +29,9 @@ public class UserDAOImpl implements UserDAO{
 	public int insert(UserVO vo) {
 		return sqlsession.insert(NS+"insert", vo);
 	}
+
+	@Override
+	public int updateRecentAccess(UserVO vo) {
+		return sqlsession.update(NS+"updateRecentAccess", vo);
+	}
 }
