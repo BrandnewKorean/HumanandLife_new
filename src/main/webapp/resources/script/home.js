@@ -192,9 +192,9 @@ $(function(){
 		var data = {};
 		
 		if($(this).attr('id') == 'Best'){
-			getProduct("count desc", "Best", 4,'');
+			getProduct("count desc", "Best", 1, 4,'');
 		}else{
-			getProduct("seq desc", "New",4,'');
+			getProduct("seq desc", "New", 1, 4,'');
 		}
 	});
 	

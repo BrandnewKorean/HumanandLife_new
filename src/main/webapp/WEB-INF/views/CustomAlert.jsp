@@ -46,9 +46,16 @@
 							<div id="product-option-wrap"></div>
 						</div>
 						<div id="product-selected-option"></div>
-						<div>
-							총 구매 금액<a id="product-total-price"></a>
+						<div class="total-price-wrap">
+							총 구매 금액
+							<div class="total-price">
+								<a id="product-total-price">0</a>원
+							</div>
 						</div>
+					</div>
+					<div class="button-wrap">
+						<button>자세히 보기</button>
+						<button>구매하기</button>
 					</div>
 				</div>
 			</div>

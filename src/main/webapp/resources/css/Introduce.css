@@ -1,25 +1,11 @@
 @charset "UTF-8";
-.come-table{
-	display: flex;
-	flex-direction: column;
-	border-top: 1px solid red;
-}
-.come-table-row{
-	display: flex;
-	flex-direction: row;
-}
-.come-col1{
-	flex-basis: calc(15% - 1px);
-	border-bottom: 1px solid gray;
-	border-right: 1px solid gray;
-	text-align: center;
-	padding: 1em 0;
-	background-color: rgb(222,222,222);
-	font-weight: bold;
-	font-size: 1rem;
-}
-.come-col2{
-	flex-basis: calc(85% - 1em);
-	border-bottom: 1px solid gray;
-	padding: 1em 0 1em 1em;
-}
+.introduce .menu-wrap{margin-bottom: 1em;}
+.introduce .menu-wrap ul{list-style: none;padding: 0; margin: 0;}
+.introduce .menu-wrap ul li{display: inline-block; margin: 0 1em; cursor: pointer;}
+.introduce .menu-wrap ul .active{color: rgb(0,112,196); font-weight: 700;}
+.introduce .menu-wrap ul .start{margin-left: 0;}
+
+.introduce .page-wrap{display: flex;}
+.introduce .page-wrap button{width: 70px; background-color: rgba(0,0,0,0); border: none; cursor: pointer;}
+.introduce .page-wrap button:hover{background-color: black;}
+.introduce .page-wrap div{width: calc(100% - 70px * 2);}

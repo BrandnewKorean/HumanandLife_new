@@ -24,7 +24,7 @@
 #custom-alert .inner .product-wrap .product-inner .product-image #product-image-list li{display: inline-block; width: 100px; height: 100px; border: 2px solid rgba(0,0,0,0); cursor: pointer;}
 #custom-alert .inner .product-wrap .product-inner .product-image #product-image-list .active{border: 2px solid black;}
 
-#custom-alert .inner .product-wrap .product-inner .product-content{width: 450px; box-sizing: border-box;}
+#custom-alert .inner .product-wrap .product-inner .product-content{position: relative; width: 450px; box-sizing: border-box;}
 #custom-alert .inner .product-wrap .product-inner .product-content .product-event-wrap{display: flex;}
 #custom-alert .inner .product-wrap .product-inner .product-content .product-event-wrap .event-box{display: inline-flex; align-items: center; justify-content: center; background-color: rgb(0,112,196); color: white; padding: 0 1em;}
 #custom-alert .inner .product-wrap .product-inner .product-content .product-content-info #product-name{font-size: 20px; padding: 1em 0;}
@@ -37,10 +37,16 @@
 #custom-alert .inner .product-wrap .product-inner .product-content .product-content-info #product-option-wrap{width: calc(100% - 5px); max-height: calc(((16px + 0.5em * 2 + 2px) + 1em * 2) * 3); overflow-y: scroll;}
 #custom-alert .inner .product-wrap .product-inner .product-content .product-content-info #product-option-wrap .option{padding: 0; padding-bottom: 1em;}
 
-#custom-alert .inner .product-wrap .product-inner .product-content .product-content-info #product-selected-option{width: calc(100% - 5px);}
-#custom-alert .inner .product-wrap .product-inner .product-content .product-content-info #product-selected-option .selected-option{display: flex; padding: 1em 0;}
-#custom-alert .inner .product-wrap .product-inner .product-content .product-content-info #product-selected-option .selected-option .name{width: 200px; text-overflow: ellipsis; height: 16px; font-size: 16px; overflow: hidden; white-space: nowrap; margin-right: 10%; word-break: break-all;}
-#custom-alert .inner .product-wrap .product-inner .product-content .product-content-info #product-selected-option .selected-option .price{width: calc(100% - 200px); text-align: right;}
+#custom-alert .inner .product-wrap .product-inner .product-content .product-content-info #product-selected-option{width: calc(100% - 5px); max-height: calc((16px + 1em * 2) * 3); overflow-y: scroll;}
+#custom-alert .inner .product-wrap .product-inner .product-content .product-content-info #product-selected-option .selected-option{display: flex; padding: 1em 0; font-size: 16px;}
+#custom-alert .inner .product-wrap .product-inner .product-content .product-content-info #product-selected-option .selected-option .name{width: 200px; text-overflow: ellipsis; height: 16px; font-size: 16px; overflow: hidden; white-space: nowrap; word-break: break-all;}
+#custom-alert .inner .product-wrap .product-inner .product-content .product-content-info #product-selected-option .selected-option .number-wrap{width: 100px;}
+#custom-alert .inner .product-wrap .product-inner .product-content .product-content-info #product-selected-option .selected-option .number-wrap button, input{width: calc(100px / 3 - 2px); border: none; padding: 0; margin: 0; border: 1px solid black; text-align: center; outline: none;}
+#custom-alert .inner .product-wrap .product-inner .product-content .product-content-info #product-selected-option .selected-option .price{width: calc(100% - 300px); text-align: right;}
+#custom-alert .inner .product-wrap .product-inner .product-content .product-content-info .total-price-wrap{padding: 1em 0; border-top: 2px solid gray;}
+#custom-alert .inner .product-wrap .product-inner .product-content .product-content-info .total-price-wrap .total-price{float: right; color: rgb(0,112,196); font-size: 20px; font-weight: 700;}
+
+#custom-alert .inner .product-wrap .product-inner .product-content .button-wrap{position: absolute; bottom: 0; text-align: right; width: 100%;}
 
 @media(max-width: 1200px){
 	#custom-alert .inner .product-wrap .product-inner{flex-direction: column;}

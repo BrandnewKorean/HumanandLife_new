@@ -161,6 +161,20 @@ $(function(){
 	$('#header-search').click(function(){
 		window.location.href = '/product?main_category=All&keyword='+$('#header-search-txt').val();
 	});
+	
+	$(window).scroll(function(){
+		if(window.scrollY <= 10){
+			$('#header').css({
+				boxShadow: "0 0 0 0 rgba(0,0,0,0)",
+				transition: 0
+			});
+		}else{
+			$('#header').css({
+				boxShadow: "0 0 10px 10px rgba(0,0,0,0.3)",
+				transition: "300ms"
+			});
+		}
+	});
 });
 
 function initEvent(){

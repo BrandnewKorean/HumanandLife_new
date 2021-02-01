@@ -197,6 +197,12 @@ function buyProduct(product_code){
 				}
 			}
 			
+			var total = 0;
+			var numberlist = [];
+			var pricelist = [];
+			var number_count = 0;
+			$('#product-total-price').text(df.format(total));
+			
 			$('#product-selected-option').empty();
 			
 			$('.select-add-option').change(function(){
@@ -209,11 +215,75 @@ function buyProduct(product_code){
 					}else{
 						$('#'+id+' option:selected').addClass('selected');
 						$('#product-selected-option').append(
-							'<div>'
-								+$('#'+id+' option:selected').text()
+							'<div class="selected-option">'
+								+'<div class="name">'
+									+$('#'+id+' option:selected').text()
+								+'</div>'
+								+'<div class="number-wrap">'
+									+'<button class="number-minus" id="number-minus'+number_count+'">-</button>'
+									+'<input class="number" id="number'+number_count+'" type="text" value="1">'
+									+'<button class="number-plus" id="number-plus'+number_count+'">+</button>'
+								+'</div>'
+								+'<div class="price" id="price'+number_count+'">'
+									+df.format($('#'+id).val())+'원'
+								+'</div>'
 							+'</div>'
 						);
+						
+						total += parseInt($('#'+id).val());
+						$('#product-total-price').text(df.format(total));
+						numberlist.push(1);
+						pricelist.push(parseInt($('#'+id).val()));
+						number_count++;
 					}
+					
+					$('.number-minus').click(function(e){
+						e.stopImmediatePropagation();
+						var id = $(this).attr('id');
+						var index = parseInt(id.replace('number-minus',''));
+						
+						numberlist[index]--;
+						if(numberlist[index] < 1) numberlist[index] = 1;
+						
+						$('#number'+index).val(numberlist[index]);
+						$('#price'+index).text(df.format(numberlist[index]*pricelist[index])+'원');
+						calcTotal();
+					});
+					
+					$('.number-plus').click(function(e){
+						e.stopImmediatePropagation();
+						var id = $(this).attr('id');
+						var index = parseInt(id.replace('number-plus',''));
+						
+						numberlist[index]++;
+						
+						$('#number'+index).val(numberlist[index]);
+						$('#price'+index).text(df.format(numberlist[index]*pricelist[index])+'원');
+						calcTotal();
+					});
+					
+					$('.number').focusout(function(e){
+						e.stopImmediatePropagation();
+						var id = $(this).attr('id');
+						var index = parseInt(id.replace('number',''));
+						
+						if($(this).val() == ''){
+							alert('개수를 입력해주세요.');
+							$(this).val(numberlist[index]);
+						}else if($(this).val().replace(/[0-9]/gi,'').length > 0){
+							alert('숫자만 입력 가능합니다.');
+							$(this).val(numberlist[index]);
+						}else{
+							if($(this).val() == 0){
+								alert('최소 1 이상의 숫자만 입력해주세요.');
+								$(this).val(numberlist[index]);
+							}else{
+								numberlist[index] = parseInt($(this).val());
+								$('#price'+index).text(df.format(numberlist[index]*pricelist[index])+'원');
+								calcTotal();
+							}
+						}
+					});
 				}
 			});
 			
@@ -235,13 +305,14 @@ function buyProduct(product_code){
 					for(var i=1;i<=$('.select-option').length;i++){
 						if(i == 1){
 							nameString = $('#option'+i+' option:selected').text();
-							indexString = $('#option'+i+' option').index($('#option'+i+' option:selected'));
+							indexString = 'option'+i+'-'+$('#option'+i+' option').index($('#option'+i+' option:selected'));
 							price += parseInt($('#option'+i).val());
 						}else{
 							nameString += ' / '+$('#option'+i+' option:selected').text();
-							indexString += '-'+$('#option'+i+' option').index($('#option'+i+' option:selected'));
+							indexString += '-'+'option'+i+'-'+$('#option'+i+' option').index($('#option'+i+' option:selected'));
 							price += parseInt($('#option'+i).val());
 						}
+						$('#option'+i).val('');
 					}
 					
 					if($('#option1').hasClass(indexString)){
@@ -253,15 +324,84 @@ function buyProduct(product_code){
 								+'<div class="name">'
 									+nameString
 								+'</div>'
-								+'<div class="price">'
+								+'<div class="number-wrap">'
+									+'<button class="number-minus" id="number-minus'+number_count+'">-</button>'
+									+'<input class="number" id="number'+number_count+'" type="text" value="1">'
+									+'<button class="number-plus" id="number-plus'+number_count+'">+</button>'
+								+'</div>'
+								+'<div class="price" id="price'+number_count+'">'
 									+df.format(price)+'원'
 								+'</div>'
 							+'</div>'
 						);
 						$('#option1').addClass(indexString);
+						
+						total += price;
+						$('#product-total-price').text(df.format(total));
+						numberlist.push(1);
+						pricelist.push(price);
+						number_count++;
+						
+						$('.number-minus').click(function(e){
+							e.stopImmediatePropagation();
+							var id = $(this).attr('id');
+							var index = parseInt(id.replace('number-minus',''));
+							
+							numberlist[index]--;
+							if(numberlist[index] < 1) numberlist[index] = 1;
+							
+							$('#number'+index).val(numberlist[index]);
+							$('#price'+index).text(df.format(numberlist[index]*pricelist[index])+'원');
+							calcTotal();
+						});
+						
+						$('.number-plus').click(function(e){
+							e.stopImmediatePropagation();
+							var id = $(this).attr('id');
+							var index = parseInt(id.replace('number-plus',''));
+							
+							numberlist[index]++;
+							
+							$('#number'+index).val(numberlist[index]);
+							$('#price'+index).text(df.format(numberlist[index]*pricelist[index])+'원');
+							calcTotal();
+						});
+						
+						$('.number').focusout(function(e){
+							e.stopImmediatePropagation();
+							var id = $(this).attr('id');
+							var index = parseInt(id.replace('number',''));
+							
+							if($(this).val() == ''){
+								alert('개수를 입력해주세요.');
+								$(this).val(numberlist[index]);
+							}else if($(this).val().replace(/[0-9]/gi,'').length > 0){
+								alert('숫자만 입력 가능합니다.');
+								$(this).val(numberlist[index]);
+							}else{
+								if($(this).val() == 0){
+									alert('최소 1 이상의 숫자만 입력해주세요.');
+									$(this).val(numberlist[index]);
+								}else{
+									numberlist[index] = parseInt($(this).val());
+									$('#price'+index).text(df.format(numberlist[index]*pricelist[index])+'원');
+									calcTotal();
+								}
+							}
+						});
 					}
 				}
 			});
+			
+			function calcTotal(){
+				var total = 0;
+				
+				for(var i=0;i<number_count;i++){
+					total += numberlist[i]*pricelist[i];
+				}
+				
+				$('#product-total-price').text(df.format(total));
+			}
 		}
 	});
 	

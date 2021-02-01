@@ -1,4 +1,4 @@
-function getProduct(orderby, main_category, perPage, keyword){
+function getProduct(orderby, main_category, currPage, perPage, keyword){
 	var df = new DecimalFormat('###,###');
 	
 	$.ajax({
@@ -7,6 +7,7 @@ function getProduct(orderby, main_category, perPage, keyword){
 		data: {
 			orderby: orderby,
 			main_category: main_category,
+			currPage: currPage,
 			perPage: perPage,
 			keyword: keyword
 		},
@@ -67,7 +68,7 @@ function getProduct(orderby, main_category, perPage, keyword){
 								+'<div class="color-list" id="color-list'+i+'"></div>'
 							+'</div>'
 							+'<div class="image-list">'
-								+'<img id="image'+i+'" src="/resources/image/product_image/'+imagelist[list[i]['product_code']][0]['filename']+'" width="100%" height="100%">'
+								+'<a href="javascript: void(0);"><img id="image'+i+'" src="/resources/image/product_image/'+imagelist[list[i]['product_code']][0]['filename']+'" width="100%" height="100%"></a>'
 							+'</div>'
 							+'<div class="product-status">'
 								+statusString
@@ -124,6 +125,50 @@ function getProduct(orderby, main_category, perPage, keyword){
 			$('.buy').click(function(){
 				buyProduct($(this).attr('id').replace('buy_',''));
 			});
+			
+			setPageBlock(orderby, main_category, perPage, search, keyword);
 		}
+	});
+}
+
+function setPageBlock(orderby, main_category, perPage, search, keyword){
+	$('#page-block').empty();
+	
+	if(search['currPage'] > 1){
+		$('#page-block').append(
+			'<a class="other-page" id="page-1">'
+				+'<img style="transform: rotate(180deg);" src="/resources/icon/end.png">'
+			+'</a>'
+			+'<a class="other-page" id="page-'+(search['currPage']-1)+'">'
+				+'<img style="transform: rotate(180deg);" src="/resources/icon/next.png">'
+			+'</a>'
+		);
+	}
+	
+	for(var i=search['startPage'];i<=search['currPage']-1;i++){
+		$('#page-block').append(
+			'<a class="other-page" id="page-'+i+'">'+i+'</a>'
+		);
+	}
+	
+	$('#page-block').append('<a class="current-page">'+search['currPage']+'</a>');
+	
+	for(var i=search['currPage']+1;i<=search['endPage'];i++){
+		$('#page-block').append('<a class="other-page" id="page-'+i+'">'+i+'</a>');
+	}
+	
+	if(search['currPage'] < search['lastPage']){
+		$('#page-block').append(
+			'<a class="other-page" id="page-'+(search['currPage']+1)+'">'
+				+'<img src="/resources/icon/next.png">'
+			+'</a>'
+			+'<a class="other-page" id="page-'+search['lastPage']+'">'
+				+'<img src="/resources/icon/end.png">'
+			+'</a>'
+		);
+	}
+	
+	$('.other-page').click(function(){
+		getProduct(orderby, main_category, $(this).attr('id').replace('page-',''), perPage, keyword);
 	});
 }
