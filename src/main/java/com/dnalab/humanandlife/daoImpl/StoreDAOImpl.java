@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.dnalab.humanandlife.dao.StoreDAO;
 import com.dnalab.humanandlife.vo.ProductEventVO;
 import com.dnalab.humanandlife.vo.ProductImageVO;
+import com.dnalab.humanandlife.vo.ProductInfoVO;
 import com.dnalab.humanandlife.vo.ProductOptionVO;
 import com.dnalab.humanandlife.vo.StoreVO;
 
@@ -59,5 +60,10 @@ public class StoreDAOImpl implements StoreDAO{
 	@Override
 	public List<ProductOptionVO> getAddOptionList(String product_code) {
 		return sqlsession.selectList(NS+"getAddOptionList", product_code);
+	}
+
+	@Override
+	public ProductInfoVO getProductInfo(ProductInfoVO vo) {
+		return sqlsession.selectOne(NS+"getProductInfo", vo);
 	}
 }

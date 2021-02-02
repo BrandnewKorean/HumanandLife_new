@@ -6,19 +6,19 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="/resources/css/Home.css?ver=<%= System.currentTimeMillis()%>">
-<link rel="stylesheet" type="text/css" href="/resources/css/Product.css?ver=<%= System.currentTimeMillis()%>">
+<link rel="stylesheet" type="text/css" href="/resources/css/ProductList.css?ver=<%= System.currentTimeMillis()%>">
 <link rel="stylesheet" type="text/css" href="/resources/css/CustomAlert.css?ver=<%= System.currentTimeMillis()%>">
 <title>HumanandLife</title>
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script src="/resources/script/DecimalFormat.js"></script>
-<script src="/resources/script/product.js?ver=<%= System.currentTimeMillis()%>"></script>
+<script src="/resources/script/productlist.js?ver=<%= System.currentTimeMillis()%>"></script>
 <script src="/resources/script/home.js?ver=<%= System.currentTimeMillis()%>"></script>
 <script src="/resources/script/alert.js?ver=<%= System.currentTimeMillis()%>"></script>
 </head>
 <body>
 	<div id="wrap">
 		<jsp:include page="Header.jsp"></jsp:include>
-		<div class="home" id="contents">
+		<div class="home contents">
 			<div class="container">
 				<div class="banner-wrap" id="main_banner1_wrap">
 					<ul class="banner" id="main_banner1"></ul>

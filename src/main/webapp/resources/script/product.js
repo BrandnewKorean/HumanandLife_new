@@ -1,174 +1,438 @@
-function getProduct(orderby, main_category, currPage, perPage, keyword){
+$(function(){
 	var df = new DecimalFormat('###,###');
 	
+	var product_code = $('#product_code').val(); 
+	
 	$.ajax({
-		url: "/service/getProductList",
+		url: "/service/getProduct",
 		type: "GET",
-		data: {
-			orderby: orderby,
-			main_category: main_category,
-			currPage: currPage,
-			perPage: perPage,
-			keyword: keyword
-		},
-		beforeSend: function(){
-			$('.product-list').html(
-				'<li class="loading">'
-					+'<img src="/resources/image/loading.gif">'
-				+'</li>'
-			);
+		data:{
+			product_code: product_code
 		},
 		success: function(data){
-			var list = data.product['vo']['storeList'];
-			var imagelist = data.product['vo']['productImageMap'];
-			var eventlist = data.product['vo']['eventList'];
-			var search = data.product['search'];
+			var product = data.product['vo']['store'];
+			var event = data.product['vo']['event'];
+			var imagelist = data.product['vo']['productImageList'];
+			var nessOptionMap = data.product['vo']['nessOptionMap'];
+			var addOptionMap = data.product['vo']['addOptionMap'];
 			
-			console.log(search);
+			$('title').text(product['name']);
 			
-			if(keyword != ''){
-				if(list.length > 0){
-					$('#keyword-result').html('<a class="keyword">\''+search['keyword']+'\'</a> 에 관한 <a class="keyword">\''+search['totalRow']+'개\'</a>의 검색결과');
+			$('#image-one').html('<img id="product-one-image" src="/resources/image/product_image/'+imagelist[0]['filename']+'" width="100%" height="100%">');
+			
+			$('#image-list').css({
+				height: (imagelist.length*100)+(2*imagelist.length*2)
+			});
+			
+			$('#image-list').empty();
+			
+			for(var i=0;i<imagelist.length;i++){
+				$('#image-list').append(
+					'<li id="image-wrap'+i+'">'
+						+'<img class="image-list-one" id="image'+i+'" src="/resources/image/product_image/'+imagelist[i]['filename']+'" width="100%" height="100%" ondragstart="return false">'
+					+'</li>'
+				);
+			}
+			
+			$('#image-wrap0').addClass('active');
+			
+			$('.image-list-one').click(function(){
+				var id = $(this).attr('id'); 
+				var index = id.replace('image', '');
+				
+				$('#product-one-image').attr('src',$(this).attr('src'));
+				
+				$('#image-list li').removeClass('active');
+				$('#image-wrap'+index).addClass('active');
+			});
+			
+			var isdrag = false;
+			var drag_y = 0;
+			var top = 0;
+			$('.product-wrap .product-inner .product-image .list-wrap').on({
+				mousedown: function(e){
+					e.preventDefault();
+					isdrag = true;
+					drag_y = e.pageY;
+					top = $(this).scrollTop();
+					$('#image-list li').css({cursor: "move"});
+				},
+				mousemove: function(e){
+					e.preventDefault();
+					if(isdrag){
+						var newY = e.pageY;
+						$('.product-wrap .product-inner .product-image .list-wrap').scrollTop(top - newY + drag_y);
+					}
+				},
+				mouseup: function(e){
+					e.preventDefault();
+					isdrag = false;
+					$('#image-list li').css({cursor: "pointer"});
+				}
+			});
+			
+			$('.product-event-wrap').empty();
+			
+			if(event != null){
+				var eventString = '';
+				if(event['ispersent']){
+					eventString = '<div class="event-box">'+event['category']+'&nbsp;'+event['persent']+'%'+'</div>';
+				}else if(event['isdiscount']){
+					eventString = '<div class="event-box">'+event['category']+'&nbsp;'+df.format(event['discount'])+'</div>';
 				}else{
-					$('#keyword-result').html('<a class="keyword">\''+search['keyword']+'\'</a> 에 관한 검색결과가 없습니다.<br>다른 검색어를 입력하시거나 철자와 띄어쓰기를 확인해보세요.');
+					eventString = '<div class="event-box">'+event['category']+'&nbsp;EVENT</div>';
+				}
+				$('.product-event-wrap').append(eventString);
+			}
+			
+			$('#name').text(product['name']);
+			
+			$('#option-wrap').empty();
+			if(Object.keys(nessOptionMap).length > 0){
+				$('#option-wrap').append(
+					'<div class="option">'
+						+'<div class="option-title">'
+							+'필수옵션'
+						+'</div>'
+						+'<div class="option-content">'
+							
+						+'</div>'
+					+'</div>'
+				);
+				for(var i=1;i<=Object.keys(nessOptionMap).length;i++){
+					$('#option-wrap').append(
+						'<div class="option">'
+							+'<div class="option-title">'
+								+nessOptionMap[i][0]['option_name']
+							+'</div>'
+							+'<div class="option-content">'
+								+'<select class="select-option" id="option'+i+'"></select>'
+							+'</div>'
+						+'</div>'
+					);
+					
+					$('#option'+i).append(
+						'<option value="">옵션을 선택해주세요</option>'
+					);
+					
+					for(var j=0;j<Object.keys(nessOptionMap[i]).length;j++){
+						if(i == 1){
+							if(product['event_price'] != 0){
+								if(nessOptionMap[i][j]['price_plus'] != 0){
+									$('#option'+i).append(
+										'<option value="'+(product['event_price'])+'">'+nessOptionMap[i][j]['name']+'(+'+nessOptionMap[i][j]['price_plus']+')'+'</option>'
+									);
+								}else{
+									$('#option'+i).append(
+										'<option value="'+(product['event_price'])+'">'+nessOptionMap[i][j]['name']+'</option>'
+									);
+								}
+							}else{
+								if(nessOptionMap[i][j]['price_plus'] != 0){
+									$('#option'+i).append(
+										'<option value="'+(product['price'])+'">'+nessOptionMap[i][j]['name']+'(+'+nessOptionMap[i][j]['price_plus']+')'+'</option>'
+									);
+								}else{
+									$('#option'+i).append(
+										'<option value="'+(product['price'])+'">'+nessOptionMap[i][j]['name']+'</option>'
+									);
+								}
+							}
+						}else{
+							if(product['event_price'] != 0){
+								if(nessOptionMap[i][j]['price_plus'] != 0){
+									$('#option'+i).append(
+										'<option value="'+(nessOptionMap[i][j]['price_plus'])+'">'+nessOptionMap[i][j]['name']+'(+'+nessOptionMap[i][j]['price_plus']+')'+'</option>'
+									);
+								}else{
+									$('#option'+i).append(
+										'<option value="'+(nessOptionMap[i][j]['price_plus'])+'">'+nessOptionMap[i][j]['name']+'</option>'
+									);
+								}
+							}else{
+								if(nessOptionMap[i][j]['price_plus'] != 0){
+									$('#option'+i).append(
+										'<option value="'+(nessOptionMap[i][j]['price_plus'])+'">'+nessOptionMap[i][j]['name']+'(+'+nessOptionMap[i][j]['price_plus']+')'+'</option>'
+									);
+								}else{
+									$('#option'+i).append(
+										'<option value="'+(nessOptionMap[i][j]['price_plus'])+'">'+nessOptionMap[i][j]['name']+'</option>'
+									);
+								}
+							}
+						}
+						
+					}
 				}
 			}
 			
-			$('.product-list').empty();
-			for(var i=0;i<list.length;i++){
-				var color = list[i]['iscolor'];
-				var textString = '';
-				var eventString = '';
-				var statusString = '';
-				
-				if(eventlist[i] != null){
-					if(eventlist[i]['ispersent']){
-						eventString = '<div class="event-box">'+eventlist[i]['category']+'<br>'+eventlist[i]['persent']+'%'+'</div>';
-						textString = '<a class="name">'+list[i]['name']+'</a><br><a class="price">'+df.format(list[i]['event_price'])+'원</a><br><a class="original-price">'+df.format(list[i]['price'])+'원</a>';
-					}else if(eventlist[i]['isdiscount']){
-						eventString = '<div class="event-box">'+eventlist[i]['category']+'<br>'+df.format(eventlist[i]['discount'])+'</div>';
-						textString = '<a class="name">'+list[i]['name']+'</a><br><a class="price">'+df.format(list[i]['event_price'])+'원</a><br><a class="original-price">'+df.format(list[i]['price'])+'원</a>';
-					}else{
-						eventString = '<div class="event-box">'+eventlist[i]['category']+'<br>EVENT</div>';
-						textString = '<a class="name">'+list[i]['name']+'</a><br><a class="price">'+df.format(list[i]['price'])+'원</a>';
-					}
-				}else{
-					textString = '<a class="name">'+list[i]['name']+'</a><br><a class="price">'+df.format(list[i]['price'])+'원</a>';
-				}
-				
-				if(list[i]['isnew']){
-					statusString = '<div class="status-box">NEW</div>';
-				}
-				
-				$('.product-list').append(
-					'<li class="product" data-index="'+i+'">'
-						+'<div class="inner">'
-							+'<div class="event-list">'
-								+eventString
-								+'<div class="color-list" id="color-list'+i+'"></div>'
+			if(Object.keys(addOptionMap).length > 0){
+				$('#option-wrap').append(
+					'<div class="option">'
+						+'<div class="option-title">'
+							+'추가옵션'
+						+'</div>'
+						+'<div class="option-content">'
+						+'</div>'
+					+'</div>'
+				);
+				for(var i=Object.keys(nessOptionMap).length+1;i<(Object.keys(nessOptionMap).length+1+Object.keys(addOptionMap).length);i++){
+					$('#option-wrap').append(
+						'<div class="option">'
+							+'<div class="option-title">'
+								+addOptionMap[i][0]['option_name']
 							+'</div>'
-							+'<div class="image-list">'
-								+'<a href="javascript: void(0);"><img id="image'+i+'" src="/resources/image/product_image/'+imagelist[list[i]['product_code']][0]['filename']+'" width="100%" height="100%"></a>'
-							+'</div>'
-							+'<div class="product-status">'
-								+statusString
-							+'</div>'
-							+'<div class="item-text">'
-								+textString
-							+'</div>'
-							+'<div class="button-wrap">'
-								+'<button class="buy" id="buy_'+list[i]['product_code']+'">구매하기</button>'
-								+'<button><img class="icon" src="/resources/icon/product_basket.png"></button>'
-								+'<button><img class="icon" src="/resources/icon/heart.png"></button>'
+							+'<div class="option-content">'
+								+'<select class="select-add-option" id="addoption'+i+'"></select>'
 							+'</div>'
 						+'</div>'
-					+'</li>'
-				);
-				
-				if(color){
-					for(var j=0;j<imagelist[list[i]['product_code']].length;j++){
-						$('#color-list'+i).append(
-							'<span class="color-box" id="color-box-'+i+'-'+j+'" style="background-color: '+imagelist[list[i]['product_code']][j]['color']+';"></span>'
+					);
+					
+					$('#addoption'+i).append(
+						'<option value="">옵션을 선택해주세요</option>'
+					);
+					
+					for(var j=0;j<Object.keys(addOptionMap[i]).length;j++){
+						$('#addoption'+i).append(
+							'<option value="'+(addOptionMap[i][j]['price_plus'])+'">'+addOptionMap[i][j]['name']+'(+'+addOptionMap[i][j]['price_plus']+')'+'</option>'
 						);
 					}
 				}
 			}
 			
-			$('.product-list .color-box').hover(function(e){
+			var total = 0;
+			var numberlist = [];
+			var pricelist = [];
+			var number_count = 0;
+			$('#total-price').text(df.format(total));
+			
+			$('#selected-option').empty();
+			
+			$('.select-add-option').change(function(){
 				var id = $(this).attr('id');
-				var pindex = id.substring(id.indexOf('-', 9)+1,id.lastIndexOf('-'));
-				var cindex = id.substring(id.lastIndexOf('-')+1,id.length);
 				
-				$('#image'+pindex).attr('src', '/resources/image/product_image/'+imagelist[list[pindex]['product_code']][cindex]['filename']);
+				if($(this).val() != ""){
+					if($('#'+id+' option:selected').hasClass('selected')){
+						alert('이미 선택된 상품입니다.');
+						$(this).val('');
+					}else{
+						$('#'+id+' option:selected').addClass('selected');
+						$('#selected-option').append(
+							'<div class="selected-option">'
+								+'<div class="name">'
+									+$('#'+id+' option:selected').text()
+								+'</div>'
+								+'<div class="number-wrap">'
+									+'<button class="number-minus" id="number-minus'+number_count+'">-</button>'
+									+'<input class="number" id="number'+number_count+'" type="text" value="1">'
+									+'<button class="number-plus" id="number-plus'+number_count+'">+</button>'
+								+'</div>'
+								+'<div class="price" id="price'+number_count+'">'
+									+df.format($('#'+id).val())+'원'
+								+'</div>'
+							+'</div>'
+						);
+						
+						total += parseInt($('#'+id).val());
+						$('#total-price').text(df.format(total));
+						numberlist.push(1);
+						pricelist.push(parseInt($('#'+id).val()));
+						number_count++;
+					}
+					
+					$('.number-minus').click(function(e){
+						e.stopImmediatePropagation();
+						var id = $(this).attr('id');
+						var index = parseInt(id.replace('number-minus',''));
+						
+						numberlist[index]--;
+						if(numberlist[index] < 1) numberlist[index] = 1;
+						
+						$('#number'+index).val(numberlist[index]);
+						$('#price'+index).text(df.format(numberlist[index]*pricelist[index])+'원');
+						calcTotal();
+					});
+					
+					$('.number-plus').click(function(e){
+						e.stopImmediatePropagation();
+						var id = $(this).attr('id');
+						var index = parseInt(id.replace('number-plus',''));
+						
+						numberlist[index]++;
+						
+						$('#number'+index).val(numberlist[index]);
+						$('#price'+index).text(df.format(numberlist[index]*pricelist[index])+'원');
+						calcTotal();
+					});
+					
+					$('.number').focusout(function(e){
+						e.stopImmediatePropagation();
+						var id = $(this).attr('id');
+						var index = parseInt(id.replace('number',''));
+						
+						if($(this).val() == ''){
+							alert('개수를 입력해주세요.');
+							$(this).val(numberlist[index]);
+						}else if($(this).val().replace(/[0-9]/gi,'').length > 0){
+							alert('숫자만 입력 가능합니다.');
+							$(this).val(numberlist[index]);
+						}else{
+							if($(this).val() == 0){
+								alert('최소 1 이상의 숫자만 입력해주세요.');
+								$(this).val(numberlist[index]);
+							}else{
+								numberlist[index] = parseInt($(this).val());
+								$('#price'+index).text(df.format(numberlist[index]*pricelist[index])+'원');
+								calcTotal();
+							}
+						}
+					});
+				}
 			});
 			
-			$('.product-list .product').hover(function(){
-				var index = $(this).attr('data-index');
+			$('.select-option').change(function(){
+				var allCheck = true;
 				
-				$('#product-modal'+index).animate({
-					top: 0
-				});
-			},function(){
-				var index = $(this).attr('data-index');
+				for(var i=1;i<=$('.select-option').length;i++){
+					if($('#option'+i).val() == ''){
+						allCheck = false;
+						break;
+					}
+				}
 				
-				$('#product-modal'+index).animate({
-					top: '100%'
-				});
+				if(allCheck){
+					var indexString = '';
+					var nameString = '';
+					var price = 0;
+					
+					for(var i=1;i<=$('.select-option').length;i++){
+						if(i == 1){
+							nameString = $('#option'+i+' option:selected').text();
+							indexString = 'option'+i+'-'+$('#option'+i+' option').index($('#option'+i+' option:selected'));
+							price += parseInt($('#option'+i).val());
+						}else{
+							nameString += ' / '+$('#option'+i+' option:selected').text();
+							indexString += '-'+'option'+i+'-'+$('#option'+i+' option').index($('#option'+i+' option:selected'));
+							price += parseInt($('#option'+i).val());
+						}
+						$('#option'+i).val('');
+					}
+					
+					if($('#option1').hasClass(indexString)){
+						alert('이미 선택된 항목입니다.');
+						$(this).val('');
+					}else{
+						$('#selected-option').append(
+							'<div class="selected-option">'
+								+'<div class="name">'
+									+nameString
+								+'</div>'
+								+'<div class="number-wrap">'
+									+'<button class="number-minus" id="number-minus'+number_count+'">-</button>'
+									+'<input class="number" id="number'+number_count+'" type="text" value="1">'
+									+'<button class="number-plus" id="number-plus'+number_count+'">+</button>'
+								+'</div>'
+								+'<div class="price" id="price'+number_count+'">'
+									+df.format(price)+'원'
+								+'</div>'
+							+'</div>'
+						);
+						$('#option1').addClass(indexString);
+						
+						total += price;
+						$('#total-price').text(df.format(total));
+						numberlist.push(1);
+						pricelist.push(price);
+						number_count++;
+						
+						$('.number-minus').click(function(e){
+							e.stopImmediatePropagation();
+							var id = $(this).attr('id');
+							var index = parseInt(id.replace('number-minus',''));
+							
+							numberlist[index]--;
+							if(numberlist[index] < 1) numberlist[index] = 1;
+							
+							$('#number'+index).val(numberlist[index]);
+							$('#price'+index).text(df.format(numberlist[index]*pricelist[index])+'원');
+							calcTotal();
+						});
+						
+						$('.number-plus').click(function(e){
+							e.stopImmediatePropagation();
+							var id = $(this).attr('id');
+							var index = parseInt(id.replace('number-plus',''));
+							
+							numberlist[index]++;
+							
+							$('#number'+index).val(numberlist[index]);
+							$('#price'+index).text(df.format(numberlist[index]*pricelist[index])+'원');
+							calcTotal();
+						});
+						
+						$('.number').focusout(function(e){
+							e.stopImmediatePropagation();
+							var id = $(this).attr('id');
+							var index = parseInt(id.replace('number',''));
+							
+							if($(this).val() == ''){
+								alert('개수를 입력해주세요.');
+								$(this).val(numberlist[index]);
+							}else if($(this).val().replace(/[0-9]/gi,'').length > 0){
+								alert('숫자만 입력 가능합니다.');
+								$(this).val(numberlist[index]);
+							}else{
+								if($(this).val() == 0){
+									alert('최소 1 이상의 숫자만 입력해주세요.');
+									$(this).val(numberlist[index]);
+								}else{
+									numberlist[index] = parseInt($(this).val());
+									$('#price'+index).text(df.format(numberlist[index]*pricelist[index])+'원');
+									calcTotal();
+								}
+							}
+						});
+					}
+				}
 			});
 			
-			$('.buy').hover(function(){
-				$(this).text('Buy');
-			},function(){
-				$(this).text('구매하기');
-			});
-			
-			$('.buy').click(function(){
-				buyProduct($(this).attr('id').replace('buy_',''));
-			});
-			
-			setPageBlock(orderby, main_category, perPage, search, keyword);
+			function calcTotal(){
+				var total = 0;
+				
+				for(var i=0;i<number_count;i++){
+					total += numberlist[i]*pricelist[i];
+				}
+				
+				$('#total-price').text(df.format(total));
+			}
 		}
 	});
-}
-
-function setPageBlock(orderby, main_category, perPage, search, keyword){
-	$('#page-block').empty();
 	
-	if(search['currPage'] > 1){
-		$('#page-block').append(
-			'<a class="other-page" id="page-1">'
-				+'<img style="transform: rotate(180deg);" src="/resources/icon/end.png">'
-			+'</a>'
-			+'<a class="other-page" id="page-'+(search['currPage']-1)+'">'
-				+'<img style="transform: rotate(180deg);" src="/resources/icon/next.png">'
-			+'</a>'
-		);
-	}
-	
-	for(var i=search['startPage'];i<=search['currPage']-1;i++){
-		$('#page-block').append(
-			'<a class="other-page" id="page-'+i+'">'+i+'</a>'
-		);
-	}
-	
-	$('#page-block').append('<a class="current-page">'+search['currPage']+'</a>');
-	
-	for(var i=search['currPage']+1;i<=search['endPage'];i++){
-		$('#page-block').append('<a class="other-page" id="page-'+i+'">'+i+'</a>');
-	}
-	
-	if(search['currPage'] < search['lastPage']){
-		$('#page-block').append(
-			'<a class="other-page" id="page-'+(search['currPage']+1)+'">'
-				+'<img src="/resources/icon/next.png">'
-			+'</a>'
-			+'<a class="other-page" id="page-'+search['lastPage']+'">'
-				+'<img src="/resources/icon/end.png">'
-			+'</a>'
-		);
-	}
-	
-	$('.other-page').click(function(){
-		getProduct(orderby, main_category, $(this).attr('id').replace('page-',''), perPage, keyword);
+	$(window).scroll(function(){
+		if($(this).scrollTop() + $('#header').height() >= $('.nav').offset().top){
+			$('#header').css({
+				top: -($(this).scrollTop() + $('#header').height() - $('.nav').offset().top),
+				transition: 0
+			});
+		}else{
+			$('#header').css({
+				top: 0
+			});
+		}
 	});
-}
+	
+	$('.nav-button').click(function(){
+		$('.nav-button').removeClass('active');
+		$(this).addClass('active');
+		
+		$.ajax({
+			url: $(this).attr('data-source'),
+			type: "GET",
+			success: function(result){
+				$('#nav-result').html(result);
+			}
+		});
+	});
+	
+	$('#nav1').click();
+});

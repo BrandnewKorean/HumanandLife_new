@@ -8,6 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.dnalab.humanandlife.service.NoticeService;
 import com.dnalab.humanandlife.service.StoreService;
+import com.dnalab.humanandlife.vo.ProductInfoVO;
 import com.dnalab.humanandlife.vo.Search;
 import com.dnalab.humanandlife.vo.StoreVO;
 
@@ -109,12 +110,32 @@ public class HomeController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "product")
-	public ModelAndView product(ModelAndView mv, StoreVO vo, Search search) {
+	@RequestMapping(value = "list")
+	public ModelAndView list(ModelAndView mv, StoreVO vo, Search search) {
 		if(search.getKeyword() == null) search.setKeyword("");
 		mv.addObject("search", search);
 		mv.addObject("vo", vo);
 		mv.setViewName("ProductList");
+		return mv;
+	}
+	
+	@RequestMapping(value = "product")
+	public ModelAndView product(ModelAndView mv, StoreVO vo) {
+		mv.addObject("product_code", vo.getProduct_code());
+		mv.setViewName("Product");
+		return mv;
+	}
+	
+	@RequestMapping(value = "productInfo")
+	public ModelAndView productInfo(ModelAndView mv, ProductInfoVO vo) {
+		mv.addObject("info", storeService.getProductInfo(vo));
+		mv.setViewName("ProductInfo");
+		return mv;
+	}
+	
+	@RequestMapping(value = "productRefund")
+	public ModelAndView productRefund(ModelAndView mv) {
+		mv.setViewName("ProductRefund");
 		return mv;
 	}
 	

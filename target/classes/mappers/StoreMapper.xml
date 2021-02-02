@@ -178,4 +178,22 @@
 			product_code = #{product_code}
 		order by depth asc, price_plus asc, name asc
 	</select>
+	
+	<select id="getProductInfo" resultType="com.dnalab.humanandlife.vo.ProductInfoVO">
+		select
+			product_code,
+			manufacturer,
+			brand,
+			model,
+			origin,
+			charact,
+			func,
+			kinds,
+			receipt,
+			afterservice
+		from
+			product_info
+		where
+			product_code = #{product_code}
+	</select>
 </mapper>
