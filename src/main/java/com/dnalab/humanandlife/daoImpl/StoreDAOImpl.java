@@ -12,6 +12,7 @@ import com.dnalab.humanandlife.vo.ProductEventVO;
 import com.dnalab.humanandlife.vo.ProductImageVO;
 import com.dnalab.humanandlife.vo.ProductInfoVO;
 import com.dnalab.humanandlife.vo.ProductOptionVO;
+import com.dnalab.humanandlife.vo.ProductProvisionVO;
 import com.dnalab.humanandlife.vo.StoreVO;
 
 @Repository
@@ -65,5 +66,10 @@ public class StoreDAOImpl implements StoreDAO{
 	@Override
 	public ProductInfoVO getProductInfo(ProductInfoVO vo) {
 		return sqlsession.selectOne(NS+"getProductInfo", vo);
+	}
+
+	@Override
+	public ProductProvisionVO getProductProvision(ProductProvisionVO vo) {
+		return sqlsession.selectOne(NS+"getProductProvision", vo);
 	}
 }

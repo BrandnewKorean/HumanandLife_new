@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.dnalab.humanandlife.service.NoticeService;
 import com.dnalab.humanandlife.service.StoreService;
 import com.dnalab.humanandlife.vo.ProductInfoVO;
+import com.dnalab.humanandlife.vo.ProductProvisionVO;
 import com.dnalab.humanandlife.vo.Search;
 import com.dnalab.humanandlife.vo.StoreVO;
 
@@ -45,42 +46,30 @@ public class HomeController {
 		return mv;
 	}
 	
-	@RequestMapping(value = {"/introduce", "/introduce/ceo"})
-	public ModelAndView introduce1(ModelAndView mv) {
+	@RequestMapping(value = "/introduce")
+	public ModelAndView introduce(ModelAndView mv) {
+		mv.setViewName("Introduce");
+		return mv;
+	}
+	
+	@RequestMapping(value = "/introduce/ceo")
+	public ModelAndView ceo(ModelAndView mv) {
 		mv.addObject("menu", "menu1");
 		mv.setViewName("Introduce");
 		return mv;
 	}
 	
 	@RequestMapping(value = "/introduce/plan")
-	public ModelAndView introduce2(ModelAndView mv) {
+	public ModelAndView plan(ModelAndView mv) {
 		mv.addObject("menu", "menu2");
 		mv.setViewName("Introduce");
 		return mv;
 	}
 	
-	@RequestMapping(value = "/introduce/come")
-	public ModelAndView introduce3(ModelAndView mv) {
+	@RequestMapping(value = "/introduce/way")
+	public ModelAndView way(ModelAndView mv) {
 		mv.addObject("menu", "menu3");
 		mv.setViewName("Introduce");
-		return mv;
-	}
-	
-	@RequestMapping(value = "/ceo")
-	public ModelAndView ceo(ModelAndView mv) {
-		mv.setViewName("CEO");
-		return mv;
-	}
-	
-	@RequestMapping(value = "/business-plan")
-	public ModelAndView businessplan(ModelAndView mv) {
-		mv.setViewName("Business");
-		return mv;
-	}
-	
-	@RequestMapping(value = "/way-to-come")
-	public ModelAndView waytocome(ModelAndView mv) {
-		mv.setViewName("WaytoCome");
 		return mv;
 	}
 	
@@ -127,8 +116,9 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "productInfo")
-	public ModelAndView productInfo(ModelAndView mv, ProductInfoVO vo) {
+	public ModelAndView productInfo(ModelAndView mv, ProductInfoVO vo, ProductProvisionVO vo2) {
 		mv.addObject("info", storeService.getProductInfo(vo));
+		mv.addObject("provision", storeService.getProductProvision(vo2));
 		mv.setViewName("ProductInfo");
 		return mv;
 	}
@@ -136,6 +126,12 @@ public class HomeController {
 	@RequestMapping(value = "productRefund")
 	public ModelAndView productRefund(ModelAndView mv) {
 		mv.setViewName("ProductRefund");
+		return mv;
+	}
+	
+	@RequestMapping(value = "productSalesman")
+	public ModelAndView productSalesman(ModelAndView mv) {
+		mv.setViewName("ProductSalesman");
 		return mv;
 	}
 	

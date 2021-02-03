@@ -15,6 +15,7 @@ import com.dnalab.humanandlife.vo.ProductEventVO;
 import com.dnalab.humanandlife.vo.ProductImageVO;
 import com.dnalab.humanandlife.vo.ProductInfoVO;
 import com.dnalab.humanandlife.vo.ProductOptionVO;
+import com.dnalab.humanandlife.vo.ProductProvisionVO;
 import com.dnalab.humanandlife.vo.Search;
 import com.dnalab.humanandlife.vo.StoreContentVO;
 import com.dnalab.humanandlife.vo.StoreOneVO;
@@ -152,4 +153,12 @@ public class StoreServiceImpl implements StoreService{
 		vo = dao.getProductInfo(vo);
 		return vo;
 	}
+
+	@Override
+	public ProductProvisionVO getProductProvision(ProductProvisionVO vo) {
+		vo = dao.getProductProvision(vo);
+		return vo;
+	}
+
+	
 }

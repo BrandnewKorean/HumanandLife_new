@@ -3,8 +3,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="/resources/css/Footer.css?ver=<%= System.currentTimeMillis()%>">
+<meta charset="UTF-8">
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script src="/resources/script/footer.js?ver=<%= System.currentTimeMillis()%>"></script>
 </head>
 <body>
 	<div id="footer">
@@ -40,6 +42,18 @@
 				<li>Hosting by 카페24(주)</li>
 			</ul>
 		</div>
+	</div>
+	<div id="footer-top">
+		<span>
+			<button id="footer-top-button">
+				<svg focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+					<path fill-rule="evenodd" clip-rule="evenodd" d="M12.0003 6.93872L20.0011 14.9399L18.5868 16.3541L12.0002 9.7671L5.41339 16.353L3.99927 14.9387L12.0003 6.93872Z"></path>
+				</svg>
+			</button>
+		</span>
+		<span class="text">
+			TOP
+		</span>
 	</div>
 </body>
 </html>

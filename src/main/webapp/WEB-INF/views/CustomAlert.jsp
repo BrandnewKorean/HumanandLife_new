@@ -54,7 +54,7 @@
 						</div>
 					</div>
 					<div class="button-wrap">
-						<button>자세히 보기</button>
+						<button id="product-detail" data-source="">자세히 보기</button>
 						<button>구매하기</button>
 					</div>
 				</div>

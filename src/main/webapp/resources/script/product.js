@@ -18,7 +18,7 @@ $(function(){
 			
 			$('title').text(product['name']);
 			
-			$('#image-one').html('<img id="product-one-image" src="/resources/image/product_image/'+imagelist[0]['filename']+'" width="100%" height="100%">');
+			$('#image-one').html('<img id="product-one-image" src="/resources/image/product_image/'+product['product_code']+'/'+imagelist[0]['filename']+'" width="100%" height="100%">');
 			
 			$('#image-list').css({
 				height: (imagelist.length*100)+(2*imagelist.length*2)
@@ -29,7 +29,7 @@ $(function(){
 			for(var i=0;i<imagelist.length;i++){
 				$('#image-list').append(
 					'<li id="image-wrap'+i+'">'
-						+'<img class="image-list-one" id="image'+i+'" src="/resources/image/product_image/'+imagelist[i]['filename']+'" width="100%" height="100%" ondragstart="return false">'
+						+'<img class="image-list-one" id="image'+i+'" src="/resources/image/product_image/'+product['product_code']+'/'+imagelist[i]['filename']+'" width="100%" height="100%" ondragstart="return false">'
 					+'</li>'
 				);
 			}

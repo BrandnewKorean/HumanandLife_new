@@ -7,6 +7,7 @@ import com.dnalab.humanandlife.vo.ProductEventVO;
 import com.dnalab.humanandlife.vo.ProductImageVO;
 import com.dnalab.humanandlife.vo.ProductInfoVO;
 import com.dnalab.humanandlife.vo.ProductOptionVO;
+import com.dnalab.humanandlife.vo.ProductProvisionVO;
 import com.dnalab.humanandlife.vo.StoreVO;
 
 public interface StoreDAO {
@@ -19,4 +20,5 @@ public interface StoreDAO {
 	List<ProductOptionVO> getNessOptionList(String product_code);
 	List<ProductOptionVO> getAddOptionList(String product_code);
 	ProductInfoVO getProductInfo(ProductInfoVO vo);
+	ProductProvisionVO getProductProvision(ProductProvisionVO vo);
 }

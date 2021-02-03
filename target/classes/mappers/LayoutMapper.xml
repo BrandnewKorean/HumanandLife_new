@@ -10,7 +10,8 @@
 			ord,
 			filename,
 			speed,
-			banner_name
+			banner_name,
+			href
 		from
 			banner
 		where

@@ -43,16 +43,24 @@
 .nav .nav-inner .active{background-color: rgb(0,112,196); color: white; border-left: 1px solid rgb(0,112,196); border-right: 1px solid rgb(0,112,196);}
 
 #nav-result{font-weight: 700;}
-#nav-result table{width: 100%; border: 1px solid gray; border-collapse: collapse;}
-#nav-result table th{background-color: rgba(0,0,0,0.1); width: 200px;}
+#nav-result table{width: 100%; border: 1px solid gray; border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;}
+#nav-result table th{background-color: rgba(0,0,0,0.1);}
 #nav-result table td{font-weight: 500;}
-#nav-result table th, td{padding: 0.5em 1em; border: 1px solid gray; word-break: keep-all; line-height: 1.5;}
+#nav-result table th, td{border: 1px solid gray; word-break: keep-all; line-height: 1.5; padding: 0.5em 1em;}
 #nav-result table .sub{color: gray; font-size: 0.9em;}
 #nav-result table ol{padding: 0; margin: 0; padding-left: 1em;}
+#nav-result div{margin-top: 3em; text-align: center;}
+#nav-result div img{max-width: 100%;}
 
 @media(max-width: 1200px){
 	.product-wrap .product-inner{flex-direction: column;}
 	.product-wrap .product-inner .product-image{width: 100%;}
 	.product-wrap .product-inner .product-content{width: 100%;}
 	.product-wrap .product-inner .product-content .button-wrap{position: relative; bottom: 0;}
+	
+	.nav .nav-inner button{font-size: 16px;}
+	
+	#nav-result table th{font-size: 12px;}
+	#nav-result table td{font-size: 12px;}
+	#nav-result table th, td{padding: 0.5em 0;}
 }

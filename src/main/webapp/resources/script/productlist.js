@@ -68,7 +68,7 @@ function getProduct(orderby, main_category, currPage, perPage, keyword){
 								+'<div class="color-list" id="color-list'+i+'"></div>'
 							+'</div>'
 							+'<div class="image-list">'
-								+'<a href="product?product_code='+list[i]['product_code']+'"><img id="image'+i+'" src="/resources/image/product_image/'+imagelist[list[i]['product_code']][0]['filename']+'" width="100%" height="100%"></a>'
+								+'<a target="_blank" href="product?product_code='+list[i]['product_code']+'"><img id="image'+i+'" src="/resources/image/product_image/'+list[i]['product_code']+'/'+imagelist[list[i]['product_code']][0]['filename']+'" width="100%" height="100%"></a>'
 							+'</div>'
 							+'<div class="product-status">'
 								+statusString
@@ -78,7 +78,6 @@ function getProduct(orderby, main_category, currPage, perPage, keyword){
 							+'</div>'
 							+'<div class="button-wrap">'
 								+'<button class="buy" id="buy_'+list[i]['product_code']+'">구매하기</button>'
-								+'<button><img class="icon" src="/resources/icon/product_basket.png"></button>'
 								+'<button><img class="icon" src="/resources/icon/heart.png"></button>'
 							+'</div>'
 						+'</div>'
@@ -99,7 +98,7 @@ function getProduct(orderby, main_category, currPage, perPage, keyword){
 				var pindex = id.substring(id.indexOf('-', 9)+1,id.lastIndexOf('-'));
 				var cindex = id.substring(id.lastIndexOf('-')+1,id.length);
 				
-				$('#image'+pindex).attr('src', '/resources/image/product_image/'+imagelist[list[pindex]['product_code']][cindex]['filename']);
+				$('#image'+pindex).attr('src', '/resources/image/product_image/'+list[pindex]['product_code']+'/'+imagelist[list[pindex]['product_code']][cindex]['filename']);
 			});
 			
 			$('.product-list .product').hover(function(){

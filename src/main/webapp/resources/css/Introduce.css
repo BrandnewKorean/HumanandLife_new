@@ -5,7 +5,29 @@
 .introduce .menu-wrap ul .active{color: rgb(0,112,196); font-weight: 700;}
 .introduce .menu-wrap ul .start{margin-left: 0;}
 
-.introduce .page-wrap{display: flex;}
-.introduce .page-wrap button{width: 70px; background-color: rgba(0,0,0,0); border: none; cursor: pointer;}
+.introduce .page-wrap{position: relative; border: 2px solid black; width: 100%; height: 60vh; overflow: hidden;}
+.introduce .page-wrap button{position: absolute; width: 70px; background-color: rgba(0,0,0,0); border: none; cursor: pointer; height: 100%; outline: none;}
 .introduce .page-wrap button:hover{background-color: black;}
-.introduce .page-wrap div{width: calc(100% - 70px * 2);}
+
+.introduce .page-wrap button svg{fill: gray;}
+.introduce .page-wrap button:hover > svg{fill: rgb(0,112,196);}
+
+.introduce .page-wrap #left{left: 0; top: 0;}
+.introduce .page-wrap #left svg{transform: rotate(270deg);}
+.introduce .page-wrap #right{right: 0; top: 0;}
+.introduce .page-wrap #right svg{transform: rotate(90deg);}
+
+.introduce .page-wrap #page{width: 400%; height: 100%; list-style: none; padding: 0; margin: 0;}
+.introduce .page-wrap #page li{float: left; display: flex; height: 100%; width: calc((100% / 4) - 70px * 2); padding: 0 70px; word-break: keep-all; line-height: 1.5; align-items: center;}
+.introduce .page-wrap #page .intro{background-color: black; color: white; justify-content: center;}
+.introduce .page-wrap #page .intro div{text-align: center; line-height: 1.5;}
+.introduce .page-wrap #page .intro .name{font-size: 50px; opacity: 0; font-weight: 700;}
+.introduce .page-wrap #page .intro .since{font-size: 20px; opacity: 0;}
+
+.introduce .page-wrap #page li div .top-image{margin-left: 1em; margin-bottom: 1em;}
+
+.introduce .page-wrap #page li .location{width: 100%; height: 90%;}
+.introduce .page-wrap #page li .location #navermap{width: 100%; height: 50%; border: 1px solid gray;}
+.introduce .page-wrap #page li .location .row{display: flex; flex-direction: row; align-items: center; padding: 0.5em 0;}
+.introduce .page-wrap #page li .location .row .icon{width: 40px; height: 40px;}
+

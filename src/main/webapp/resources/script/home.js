@@ -15,10 +15,11 @@ $(function(){
 		},
 		success: function(data){
 			var list = data.list;
+			console.log(list);
 			
 			for(var i=0;i<list.length;i++){
 				$('#main_banner1').append(
-					'<li class="slide_content"><img src="/resources/image/home/banner/'+list[i]['filename']+'" width="100%" height="100%"></li>'
+					'<li class="slide_content"><a href="'+list[i]['href']+'"><img src="/resources/image/home/banner/'+list[i]['filename']+'" width="100%" height="100%"></a></li>'
 				);
 			}
 			

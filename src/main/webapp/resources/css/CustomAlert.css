@@ -49,6 +49,13 @@
 #custom-alert .inner .product-wrap .product-inner .product-content .button-wrap{position: absolute; bottom: 0; text-align: right; width: 100%;}
 
 @media(max-width: 1200px){
-	#custom-alert .inner .product-wrap .product-inner{flex-direction: column;}
+	#custom-alert .inner .product-wrap{width: 100%; height: 80vh; overflow-y: scroll;}
+	
+	#custom-alert .inner .product-wrap .product-inner{flex-direction: column; width: 100%;}
 	#custom-alert .inner .product-wrap .product-inner .product-image{width: 100%;}
+	#custom-alert .inner .product-wrap .product-inner .product-image #product-image-one{height: 100vw;}
+	#custom-alert .inner .product-wrap .product-inner .product-content{width: 100%;}
+	#custom-alert .inner .product-wrap .product-inner .product-content .button-wrap{position: relative;}
+	
+	#custom-alert .inner .product-wrap .product-inner .product-content .product-content-info #product-selected-option .selected-option .name{width: 100px;}
 }

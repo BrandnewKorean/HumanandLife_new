@@ -190,9 +190,24 @@
 			func,
 			kinds,
 			receipt,
-			afterservice
+			afterservice,
+			content
 		from
 			product_info
+		where
+			product_code = #{product_code}
+	</select>
+	
+	<select id="getProductProvision" resultType="com.dnalab.humanandlife.vo.ProductProvisionVO">
+		select
+			product_code,
+			name,
+			law,
+			manufacturer,
+			country,
+			servicecenter
+		from
+			product_provision
 		where
 			product_code = #{product_code}
 	</select>

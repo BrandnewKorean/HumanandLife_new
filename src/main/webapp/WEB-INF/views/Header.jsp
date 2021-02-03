@@ -92,21 +92,14 @@
 				<div class="list-wrap">
 					<a class="title" id="title1">About</a>
 					<ul class="list" id="list1">
-						<li><a href="#">CEO 인사말</a></li>
-						<li><a href="#">사업개요</a></li>
-						<li><a href="#">찾아오시는 길</a></li>
+						<li><a href="/introduce/ceo">CEO 인사말</a></li>
+						<li><a href="/introduce/plan">사업개요</a></li>
+						<li><a href="/introduce/way">찾아오시는 길</a></li>
 					</ul>
 				</div>
 				<div class="list-wrap">
 					<a class="title" id="title2">Shop</a>
 					<ul class="list" id="list2">
-						<li><a href="#">전체 상품</a></li>
-						<li><a href="#">베스트 상품</a></li>
-						<li><a href="#">신규 상품</a></li>
-						<li><a href="#">클렌저</a></li>
-						<li><a href="#">마스크</a></li>
-						<li><a href="#">위생용품</a></li>
-						<li><a href="#">방역용품</a></li>
 					</ul>
 				</div>
 				<div class="list-wrap">

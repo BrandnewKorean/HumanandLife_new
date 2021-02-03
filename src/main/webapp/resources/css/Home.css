@@ -1,5 +1,5 @@
 @charset "UTF-8";
-.home .banner-wrap{position: relative; width: 100%; height: 500px; overflow-x: hidden;}
+.home .banner-wrap{position: relative; width: 100%; height: 500px; overflow: hidden;}
 .home .banner-wrap .banner{list-style: none; padding: 0; margin: 0; height: inherit;}
 .home .banner-wrap .banner li{float: left; height: inherit;}
 .home .banner-wrap .banner-page{list-style: none; position: absolute; display: flex; bottom: 10px; width: 100%; padding: 0; margin: 0; justify-content: center;}

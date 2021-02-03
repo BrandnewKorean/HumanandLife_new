@@ -17,7 +17,7 @@ function buyProduct(product_code){
 			var nessOptionMap = data.product['vo']['nessOptionMap'];
 			var addOptionMap = data.product['vo']['addOptionMap'];
 			
-			$('#product-image-one').html('<img id="product-one-image" src="/resources/image/product_image/'+imagelist[0]['filename']+'" width="100%" height="100%">');
+			$('#product-image-one').html('<img id="product-one-image" src="/resources/image/product_image/'+product['product_code']+'/'+imagelist[0]['filename']+'" width="100%" height="100%">');
 			
 			$('#product-image-list').css({
 				width: (imagelist.length*100)+(2*imagelist.length*2)
@@ -27,7 +27,7 @@ function buyProduct(product_code){
 			for(var i=0;i<imagelist.length;i++){
 				$('#product-image-list').append(
 					'<li id="product-image-wrap'+i+'">'
-						+'<img class="product-image-list-one" id="product-image'+i+'" src="/resources/image/product_image/'+imagelist[i]['filename']+'" width="100%" height="100%" ondragstart="return false">'
+						+'<img class="product-image-list-one" id="product-image'+i+'" src="/resources/image/product_image/'+product['product_code']+'/'+imagelist[i]['filename']+'" width="100%" height="100%" ondragstart="return false">'
 					+'</li>'
 				);
 			}
@@ -393,6 +393,8 @@ function buyProduct(product_code){
 				}
 			});
 			
+			$('#product-detail').attr('data-source', product_code);
+			
 			function calcTotal(){
 				var total = 0;
 				
@@ -403,6 +405,11 @@ function buyProduct(product_code){
 				$('#product-total-price').text(df.format(total));
 			}
 		}
+	});
+	
+	$('#product-detail').click(function(e){
+		e.stopImmediatePropagation();
+		window.open("product?product_code="+$(this).attr('data-source'),'_blank');
 	});
 	
 	$('#product-exit').click(function(){

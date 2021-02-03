@@ -30,6 +30,9 @@ $(function(){
 						+'</li>'
 					);
 				}
+				$('#header-menu-modal #list2').append(
+					'<li><a href="'+list[i]['href']+'">'+name+'</a></li>'
+				);
 			}
 		}
 	});
@@ -159,7 +162,7 @@ $(function(){
 	});
 	
 	$('#header-search').click(function(){
-		window.location.href = '/product?main_category=All&keyword='+$('#header-search-txt').val();
+		window.location.href = '/list?main_category=All&keyword='+$('#header-search-txt').val();
 	});
 	
 	$(window).scroll(function(){

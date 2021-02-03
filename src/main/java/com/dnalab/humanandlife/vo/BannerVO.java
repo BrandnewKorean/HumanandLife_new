@@ -6,6 +6,7 @@ public class BannerVO {
 	private String filename;
 	private int speed;
 	private String banner_name;
+	private String href;
 	
 	public String getBanner_id() {
 		return banner_id;
@@ -37,10 +38,16 @@ public class BannerVO {
 	public void setBanner_name(String banner_name) {
 		this.banner_name = banner_name;
 	}
+	public String getHref() {
+		return href;
+	}
+	public void setHref(String href) {
+		this.href = href;
+	}
 	
 	@Override
 	public String toString() {
 		return "BannerVO [banner_id=" + banner_id + ", ord=" + ord + ", filename=" + filename + ", speed=" + speed
-				+ ", banner_name=" + banner_name + "]";
+				+ ", banner_name=" + banner_name + ", href=" + href + "]";
 	}
 }

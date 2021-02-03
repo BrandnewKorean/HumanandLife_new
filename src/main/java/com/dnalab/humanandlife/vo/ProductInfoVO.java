@@ -11,6 +11,7 @@ public class ProductInfoVO {
 	private String kinds;
 	private String receipt;
 	private String afterservice;
+	private String content;
 	
 	public String getProduct_code() {
 		return product_code;
@@ -72,10 +73,17 @@ public class ProductInfoVO {
 	public void setAfterservice(String afterservice) {
 		this.afterservice = afterservice;
 	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
+	
 	@Override
 	public String toString() {
 		return "ProductInfoVO [product_code=" + product_code + ", manufacturer=" + manufacturer + ", brand=" + brand
 				+ ", model=" + model + ", origin=" + origin + ", charact=" + charact + ", func=" + func + ", kinds="
-				+ kinds + ", receipt=" + receipt + ", afterservice=" + afterservice + "]";
+				+ kinds + ", receipt=" + receipt + ", afterservice=" + afterservice + ", content=" + content + "]";
 	}
 }
