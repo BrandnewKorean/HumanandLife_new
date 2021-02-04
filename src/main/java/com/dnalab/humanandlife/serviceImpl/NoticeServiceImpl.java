@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.dnalab.humanandlife.dao.NoticeDAO;
 import com.dnalab.humanandlife.service.NoticeService;
+import com.dnalab.humanandlife.vo.NoticeAttachVO;
 import com.dnalab.humanandlife.vo.NoticeVO;
 import com.dnalab.humanandlife.vo.Search;
 
@@ -40,7 +41,34 @@ public class NoticeServiceImpl implements NoticeService{
 	}
 
 	@Override
-	public NoticeVO getNotice(int seq) {
-		return dao.selectOne(seq);
+	public Map<String,Object> getNotice(int currPage, int seq, Search search) {
+		Map<String ,Object> result = new HashMap<String, Object>();
+		
+		search.setCurrPage(currPage);
+		if(search.getKeyword() == null) search.setKeyword("");
+		
+		int totalRow = dao.getSearchTotalRow(search);
+		
+		search.setTotalRow(totalRow);
+		
+		NoticeVO current = new NoticeVO();
+		NoticeVO back = new NoticeVO();
+		NoticeVO front = new NoticeVO();
+		
+		current = dao.selectOne(seq);
+		back = dao.selectOne(seq+1);
+		front = dao.selectOne(seq-1);
+		
+		List<NoticeAttachVO> list = new ArrayList<NoticeAttachVO>();
+		
+		list = dao.getAttachList(seq);
+		
+		result.put("search", search);
+		result.put("current", current);
+		result.put("back", back);
+		result.put("front", front);
+		result.put("attach", list);
+		
+		return result;
 	}
 }

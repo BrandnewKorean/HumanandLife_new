@@ -17,7 +17,7 @@
 #footer .copywrite{position: absolute; bottom: 0;}
 
 #footer-top{position: fixed; right: 10px; bottom: 10px; cursor: pointer; z-index: 10001;}
-#footer-top button{float: left; width: 30px; height: 30px; border: none; background-color: rgb(0,112,196); padding: 0; margin: 0; outline: none;}
+#footer-top button{float: left; width: 30px; height: 30px; border: none; background-color: rgb(0,112,196); padding: 0; margin: 0; outline: none; cursor: pointer;}
 #footer-top button svg{width: 100%; height: 100%; fill: white;}
 #footer-top .text{float: left; width: 0; background-color: rgb(0,112,196); height: 30px; white-space: nowrap; overflow: hidden; display: flex; align-items: center; justify-content: center; color: white;}
 

@@ -43,14 +43,26 @@
 	
 	<select id="selectOne" resultType="com.dnalab.humanandlife.vo.NoticeVO">
 		select
-			seq,
-			title,
-			content,
-			writer,
-			regdate
+			n.seq,
+			n.title,
+			n.content,
+			n.writer,
+			DATE_FORMAT(n.regdate, '%Y-%m-%d') as regdate
 		from
-			notice
+			notice n
 		where
 			seq = #{seq}
+	</select>
+	
+	<select id="getAttachList" resultType="com.dnalab.humanandlife.vo.NoticeAttachVO">
+		select
+			seq,
+			ord,
+			filename
+		from
+			notice_attach
+		where
+			seq = #{seq}
+		order by ord asc
 	</select>
 </mapper>

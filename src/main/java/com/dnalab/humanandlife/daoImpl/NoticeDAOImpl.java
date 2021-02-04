@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.dnalab.humanandlife.dao.NoticeDAO;
+import com.dnalab.humanandlife.vo.NoticeAttachVO;
 import com.dnalab.humanandlife.vo.NoticeVO;
 import com.dnalab.humanandlife.vo.Search;
 
@@ -31,5 +32,10 @@ public class NoticeDAOImpl implements NoticeDAO{
 	@Override
 	public NoticeVO selectOne(int seq) {
 		return sqlsession.selectOne(NS+"selectOne", seq);
+	}
+
+	@Override
+	public List<NoticeAttachVO> getAttachList(int seq) {
+		return sqlsession.selectList(NS+"getAttachList", seq);
 	}
 }

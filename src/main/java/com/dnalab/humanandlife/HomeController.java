@@ -92,9 +92,7 @@ public class HomeController {
 	
 	@RequestMapping(value = "notice/{currPage}/{seq}")
 	public ModelAndView noticeview(ModelAndView mv, @PathVariable int currPage, @PathVariable int seq, Search search) {
-		search.setCurrPage(currPage);
-		mv.addObject("search", search);
-		mv.addObject("vo", noticeService.getNotice(seq));
+		mv.addObject("notice", noticeService.getNotice(currPage, seq, search));
 		mv.setViewName("NoticeView");
 		return mv;
 	}
